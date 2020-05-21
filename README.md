@@ -1,5 +1,5 @@
-<!--
-<p align="center"><img src="https://github.com/MartMbithi/LMS/blob/master/public/LMS_Core/img/logo.png" width="400"></p> -->
+
+<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/LAMCorp.png" width="400"></p> 
 
 ## About LAMCorp
 The LAMCorp Suite provides the professional tools for monitoring transparency and management in water dispensing firms.
