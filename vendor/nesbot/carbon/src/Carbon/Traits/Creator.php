@@ -14,12 +14,13 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\Exceptions\InvalidDateException;
+use Carbon\Exceptions\InvalidFormatException;
+use Carbon\Exceptions\OutOfRangeException;
 use Carbon\Translator;
 use Closure;
 use DateTimeInterface;
 use DateTimeZone;
 use Exception;
-use InvalidArgumentException;
 
 /**
  * Trait Creator.
@@ -49,9 +50,15 @@ trait Creator
      *
      * @param string|null              $time
      * @param DateTimeZone|string|null $tz
+     *
+     * @throws InvalidFormatException
      */
     public function __construct($time = null, $tz = null)
     {
+        if ($time instanceof DateTimeInterface) {
+            $time = $this->constructTimezoneFromDateTime($time, $tz)->format('Y-m-d H:i:s.u');
+        }
+
         if (is_int($time)) {
             $time = "@$time";
         }
@@ -74,7 +81,11 @@ trait Creator
             setlocale(LC_NUMERIC, 'C');
         }
 
-        parent::__construct($time ?: 'now', static::safeCreateDateTimeZone($tz));
+        try {
+            parent::__construct($time ?: 'now', static::safeCreateDateTimeZone($tz) ?: null);
+        } catch (Exception $exception) {
+            throw new InvalidFormatException($exception->getMessage(), 0, $exception);
+        }
 
         $this->constructedObjectId = spl_object_hash($this);
 
@@ -83,6 +94,31 @@ trait Creator
         }
 
         static::setLastErrors(parent::getLastErrors());
+    }
+
+    /**
+     * Get timezone from a datetime instance.
+     *
+     * @param DateTimeInterface        $date
+     * @param DateTimeZone|string|null $tz
+     *
+     * @return DateTimeInterface
+     */
+    private function constructTimezoneFromDateTime(DateTimeInterface $date, &$tz)
+    {
+        if ($tz !== null) {
+            $safeTz = static::safeCreateDateTimeZone($tz);
+
+            if ($safeTz) {
+                return $date->setTimezone($safeTz);
+            }
+
+            return $date;
+        }
+
+        $tz = $date->getTimezone();
+
+        return $date;
     }
 
     /**
@@ -96,7 +132,7 @@ trait Creator
     /**
      * Create a Carbon instance from a DateTime one.
      *
-     * @param \DateTimeInterface $date
+     * @param DateTimeInterface $date
      *
      * @return static
      */
@@ -133,6 +169,8 @@ trait Creator
      * @param string|null              $time
      * @param DateTimeZone|string|null $tz
      *
+     * @throws InvalidFormatException
+     *
      * @return static
      */
     public static function rawParse($time = null, $tz = null)
@@ -144,11 +182,13 @@ trait Creator
         try {
             return new static($time, $tz);
         } catch (Exception $exception) {
-            try {
-                return static::now($tz)->change($time);
-            } catch (Exception $ignored) {
-                throw $exception;
+            $date = @static::now($tz)->change($time);
+
+            if (!$date) {
+                throw new InvalidFormatException("Could not parse '$time': ".$exception->getMessage(), 0, $exception);
             }
+
+            return $date;
         }
     }
 
@@ -161,6 +201,8 @@ trait Creator
      *
      * @param string|null              $time
      * @param DateTimeZone|string|null $tz
+     *
+     * @throws InvalidFormatException
      *
      * @return static
      */
@@ -185,6 +227,8 @@ trait Creator
      * @param string                   $time
      * @param string                   $locale
      * @param DateTimeZone|string|null $tz
+     *
+     * @throws InvalidFormatException
      *
      * @return static
      */
@@ -276,7 +320,7 @@ trait Creator
     private static function assertBetween($unit, $value, $min, $max)
     {
         if (static::isStrictModeEnabled() && ($value < $min || $value > $max)) {
-            throw new InvalidArgumentException("$unit must be between $min and $max, $value given");
+            throw new OutOfRangeException($unit, $min, $max, $value);
         }
     }
 
@@ -315,7 +359,7 @@ trait Creator
      * @param int|null                 $second
      * @param DateTimeZone|string|null $tz
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static
      */
@@ -389,7 +433,7 @@ trait Creator
      * If $hour is not null then the default values for $minute and $second
      * will be 0.
      *
-     * If one of the set values is not valid, an \InvalidArgumentException
+     * If one of the set values is not valid, an InvalidDateException
      * will be thrown.
      *
      * @param int|null                 $year
@@ -400,7 +444,7 @@ trait Creator
      * @param int|null                 $second
      * @param DateTimeZone|string|null $tz
      *
-     * @throws \Carbon\Exceptions\InvalidDateException|\InvalidArgumentException
+     * @throws InvalidDateException
      *
      * @return static|false
      */
@@ -441,7 +485,7 @@ trait Creator
      * @param int|null                 $day
      * @param DateTimeZone|string|null $tz
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static
      */
@@ -458,6 +502,8 @@ trait Creator
      * @param int|null                 $day
      * @param DateTimeZone|string|null $tz
      *
+     * @throws InvalidFormatException
+     *
      * @return static
      */
     public static function createMidnightDate($year = null, $month = null, $day = null, $tz = null)
@@ -473,7 +519,7 @@ trait Creator
      * @param int|null                 $second
      * @param DateTimeZone|string|null $tz
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static
      */
@@ -488,7 +534,7 @@ trait Creator
      * @param string                   $time
      * @param DateTimeZone|string|null $tz
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static
      */
@@ -502,7 +548,7 @@ trait Creator
      * @param string                         $time
      * @param DateTimeZone|string|false|null $originalTz
      *
-     * @return \DateTimeInterface|false
+     * @return DateTimeInterface|false
      */
     private static function createFromFormatAndTimezone($format, $time, $originalTz)
     {
@@ -537,7 +583,7 @@ trait Creator
      * @param string                         $time
      * @param DateTimeZone|string|false|null $tz
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static|false
      */
@@ -591,7 +637,7 @@ trait Creator
         }
 
         if (static::isStrictModeEnabled()) {
-            throw new InvalidArgumentException(implode(PHP_EOL, $lastErrors['errors']));
+            throw new InvalidFormatException(implode(PHP_EOL, $lastErrors['errors']));
         }
 
         return false;
@@ -604,7 +650,7 @@ trait Creator
      * @param string                         $time
      * @param DateTimeZone|string|false|null $tz
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static|false
      */
@@ -632,7 +678,7 @@ trait Creator
      * @param string|null                                        $locale     locale to be used for LTS, LT, LL, LLL, etc. macro-formats (en by fault, unneeded if no such macro-format in use)
      * @param \Symfony\Component\Translation\TranslatorInterface $translator optional custom translator to use for macro-formats
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static|false
      */
@@ -756,7 +802,7 @@ trait Creator
             $format = $replacements[$code] ?? '?';
 
             if ($format === '!') {
-                throw new InvalidArgumentException("Format $code not supported for creation.");
+                throw new InvalidFormatException("Format $code not supported for creation.");
             }
 
             return $format;
@@ -773,7 +819,7 @@ trait Creator
      * @param string                         $time
      * @param DateTimeZone|string|false|null $tz
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static|false
      */
@@ -790,7 +836,7 @@ trait Creator
      * @param string                         $time
      * @param DateTimeZone|string|false|null $tz
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidFormatException
      *
      * @return static|false
      */
@@ -808,6 +854,8 @@ trait Creator
      * and recurrences). Throw an exception for invalid format, but otherwise return null.
      *
      * @param mixed $var
+     *
+     * @throws InvalidFormatException
      *
      * @return static|null
      */

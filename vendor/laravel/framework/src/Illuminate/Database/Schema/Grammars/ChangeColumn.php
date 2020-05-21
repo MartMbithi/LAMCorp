@@ -121,9 +121,10 @@ class ChangeColumn
             $options['length'] = static::calculateDoctrineTextLength($fluent['type']);
         }
 
-        if (in_array($fluent['type'], ['json', 'binary'])) {
+        if (static::doesntNeedCharacterOptions($fluent['type'])) {
             $options['customSchemaOptions'] = [
                 'collation' => '',
+                'charset' => '',
             ];
         }
 
@@ -175,6 +176,31 @@ class ChangeColumn
             default:
                 return 255 + 1;
         }
+    }
+
+    /**
+     * Determine if the given type does not need character / collation options.
+     *
+     * @param  string  $type
+     * @return bool
+     */
+    protected static function doesntNeedCharacterOptions($type)
+    {
+        return in_array($type, [
+            'bigInteger',
+            'binary',
+            'boolean',
+            'date',
+            'decimal',
+            'double',
+            'float',
+            'integer',
+            'json',
+            'mediumInteger',
+            'smallInteger',
+            'time',
+            'tinyInteger',
+        ]);
     }
 
     /**
