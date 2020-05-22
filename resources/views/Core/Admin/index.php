@@ -6,10 +6,10 @@
     {
         $a_email = $_POST['a_email'];
         $a_pwd = sha1(md5($_POST['a_pwd']));//double encrypt to increase security
-        $stmt=$mysqli->prepare("SELECT a_email, a_pwd, a_id  FROM LAMCorp_admin  WHERE (a_email=?|| a_name=?) AND a_pwd=?");//sql to log in user
-        $stmt->bind_param('sss', $a_email, $a_email, $a_pwd);//bind fetched parameters
+        $stmt=$mysqli->prepare("SELECT a_email, a_pwd, a_id  FROM LAMCorp_admin  WHERE a_email=? AND a_pwd=?");//sql to log in user
+        $stmt->bind_param('ss',  $a_email, $a_pwd);//bind fetched parameters
         $stmt->execute();//execute bind 
-        $stmt -> bind_result($a_email, $a_email,  $a_pwd, $id);//bind result
+        $stmt -> bind_result($a_email, $a_pwd, $a_id);//bind result
         $rs=$stmt->fetch();
         $_SESSION['a_id'] = $a_id;
         
@@ -36,16 +36,16 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">Sign In</h1>
-                        <p class="">Log in to your account to continue.</p>
+                        <h1 class="">LAMCorp Suite</h1>
+                        <p class="">Enter your email or username and email</p>
                         
                         <form method="post" class="text-left">
                             <div class="form">
 
                                 <div id="username-field" class="field-wrapper input">
-                                    <label for="username">USERNAME | EMAIL </label>
+                                    <label for="username"> EMAIL </label>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    <input id="username" name="a_email" type="text" class="form-control" placeholder="e.g John_Doe">
+                                    <input id="username" name="a_email" type="email" class="form-control">
                                 </div>
 
                                 <div id="password-field" class="field-wrapper input mb-2">
@@ -77,9 +77,10 @@
                                         <span class="brand-name">Github</span>
                                     </a>
                                 </div>
--->
 
                                 <p class="signup-link">Not registered ? <a href="signup.php">Create an account</a></p>
+                                //Uncomment This line to allow your super users to create account
+                                -->
 
                             </div>
                         </form>

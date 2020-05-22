@@ -49,7 +49,7 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">Register</h1>
+                    <h1 class="">LAMCorp Suite</h1>
                         <p class="signup-link register">Already have an account? <a href="index.php">Log in</a></p>
                         <form method ='post' class="text-left">
                             <div class="form">

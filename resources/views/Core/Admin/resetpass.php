@@ -50,7 +50,7 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">Password Recovery</h1>
+                    <h1 class="">LAMCorp Suite</h1>
                         <p class="signup-link recovery">Enter your email and instructions will sent to you!</p>
                         <form method="post" class="text-left">
                             <div class="form">
