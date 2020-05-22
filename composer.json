@@ -11,6 +11,7 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
+        "symfony/translation": "4.3.8",
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
