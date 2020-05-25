@@ -2,6 +2,7 @@
     session_start();
     include('config/config.php');
     include('config/checklogin.php');
+    include('partials/analytics.php');
     check_login();
  
 ?>
@@ -76,57 +77,174 @@
 
                 <div class="row layout-top-spacing">
 
-                    <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                   <!-- <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-one">
                             <div class="widget-heading">
-                                <h6 class="">Statistics</h6>
+                                <h6 class="">LAMCorp Statistics</h6>
                             </div>
                             <div class="w-chart">
                                 <div class="w-chart-section">
                                     <div class="w-detail">
-                                        <p class="w-title">Total Visits</p>
+                                        <p class="w-title">Staffs</p>
                                         <p class="w-stats">423,964</p>
                                     </div>
                                     <div class="w-chart-render-one">
                                         <div id="total-users"></div>
-                                    </div>
+                                    </div> 
                                 </div>
 
                                 <div class="w-chart-section">
                                     <div class="w-detail">
-                                        <p class="w-title">Paid Visits</p>
+                                        <p class="w-title">Vendors</p>
                                         <p class="w-stats">7,929</p>
                                     </div>
                                     <div class="w-chart-render-one">
                                         <div id="paid-visits"></div>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
+                    <!--Incomes-->
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
                         <div class="widget widget-card-four">
                             <div class="widget-content">
                                 <div class="w-content">
                                     <div class="w-info">
-                                        <h6 class="value">$ 45,141</h6>
-                                        <p class="">Expenses</p>
+                                        <h6 class="value">Ksh 45,141</h6>
+                                        <p class="text-primary">Total Incomes</p>
                                     </div>
                                     <div class="">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                        <div class="w-icon text-primary">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>                        
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress">
+                                <!--<div class="progress">
                                     <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
+                    <!-- ./ Incomes -->
 
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                    <!-- Expenses -->
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <h6 class="value">Ksh 45,141</h6>
+                                        <p class="text-danger">Total Expenses</p>
+                                    </div>
+                                    <div class="">
+                                        <div class="w-icon text-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="progress">
+                                    <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./ Expenses -->
+
+                    <!-- Profit --> 
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <h6 class="value">KSh 45,141</h6>
+                                        <p class="text-success">Total Profit</p>
+                                    </div>
+                                    <div class="">
+                                        <div class="w-icon text-success">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="progress">
+                                    <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Profit -->
+
+                    <!-- Staffs -->
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <h6 class="value"><?php echo $staffs;?></h6>
+                                        <p class="">Staffs</p>
+                                    </div>
+                                    <div class="">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="progress">
+                                    <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./ Staffs -->
+
+                    <!-- Vendors -->
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <h6 class="value"> 45,141</h6>
+                                        <p class="">Vendors</p>
+                                    </div>
+                                    <div class="">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="progress">
+                                    <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./ Vendors -->
+
+                    <!-- Water Points -->
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <h6 class="value">45,141</h6>
+                                        <p class="">Water Points (ATMs)</p>
+                                    </div>
+                                    <div class="">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>                       
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="progress">
+                                    <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Water Points -->
+
+                    <!--<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
                         <div class="widget widget-account-invoice-two">
                             <div class="widget-content">
                                 <div class="account-box">
@@ -144,15 +262,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-chart-three">
                             <div class="widget-heading">
                                 <div class="">
-                                    <h5 class="">Unique Visitors</h5>
+                                    <h6 class="">Cash Flow Per Water Kiosk(ATM or Water point)</h6>
                                 </div>
-
+                                <!--
                                 <div class="dropdown  custom-dropdown">
                                     <a class="dropdown-toggle" href="#" role="button" id="uniqueVisitors" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
@@ -164,10 +282,12 @@
                                         <a class="dropdown-item" href="javascript:void(0);">Download</a>
                                     </div>
                                 </div>
+                                -->
                             </div>
 
                             <div class="widget-content">
-                                <div id="uniqueVisits"></div>
+                                <!--Plot a graph indicating cash flow-->
+                                <div id="cashFlow"></div>
                             </div>
                         </div>
                     </div>
@@ -176,323 +296,41 @@
                         <div class="widget widget-activity-three">
 
                             <div class="widget-heading">
-                                <h5 class="">Notifications</h5>
+                                <h6 class="">Latest Payments Via Till Numbers</h6>
                             </div>
 
                             <div class="widget-content">
 
                                 <div class="mt-container mx-auto">
                                     <div class="timeline-line">
-                                        
+                                        <!--Payments Via TILL numbers Sort using timestamp-->
                                         <div class="item-timeline timeline-new">
                                             <div class="t-dot">
-                                                <div class="t-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                                <div class="t-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                                             </div>
                                             <div class="t-content">
                                                 <div class="t-uppercontent">
-                                                    <h5>Logs</h5>
-                                                    <span class="">27 Feb, 2020</span>
+                                                    <h5>CONFIRMED</h5>
                                                 </div>
-                                                <p><span>Updated</span> Server Logs</p>
+                                                <p>
+                                                    <span class="">27 Feb, 2020</span>
+                                                    <!--Indicate transaction ID, Customer Phone Number, Customer Name-->
+                                                    <span>Updated</span> Server Logs
+                                                </p>
                                                 <div class="tags">
+                                                <!--Indicate the till number provider that is 
+                                                Safaricom(Mpesa) = Green, Airtel(Airtel Money) = Red and Telcom (T-Kash) = Blue -->
                                                     <div class="badge badge-primary">Logs</div>
                                                     <div class="badge badge-success">CPanel</div>
                                                     <div class="badge badge-warning">Update</div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="item-timeline timeline-new">
-                                            <div class="t-dot">
-                                                <div class="t-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
-                                            </div>
-                                            <div class="t-content">
-                                                <div class="t-uppercontent">
-                                                    <h5>Mail</h5>
-                                                    <span class="">28 Feb, 2020</span>
-                                                </div>
-                                                <p>Send Mail to <a href="javascript:void(0);">HR</a> and <a href="javascript:void(0);">Admin</a></p>
-                                                <div class="tags">
-                                                    <div class="badge badge-primary">Admin</div>
-                                                    <div class="badge badge-success">HR</div>
-                                                    <div class="badge badge-warning">Mail</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-timeline timeline-new">
-                                            <div class="t-dot">
-                                                <div class="t-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                                            </div>
-                                            <div class="t-content">
-                                                <div class="t-uppercontent">
-                                                    <h5>Task Completed</h5>
-                                                    <span class="">01 Mar, 2020</span>
-                                                </div>
-                                                <p>Backup <span>Files EOD</span></p>
-                                                <div class="tags">
-                                                    <div class="badge badge-primary">Backup</div>
-                                                    <div class="badge badge-success">EOD</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-timeline timeline-new">
-                                            <div class="t-dot">
-                                                <div class="t-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg></div>
-                                            </div>
-                                            <div class="t-content">
-                                                <div class="t-uppercontent">
-                                                    <h5>Collect Docs</h5>
-                                                    <span class="">10 Mar, 2020</span>
-                                                </div>
-                                                <p>Collected documents from <a href="javascript:void(0);">Sara</a></p>
-                                                <div class="tags">
-                                                    <div class="badge badge-success">Collect</div>
-                                                    <div class="badge badge-warning">Docs</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-timeline timeline-new">
-                                            <div class="t-dot">
-                                                <div class="t-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6" y2="6"></line><line x1="6" y1="18" x2="6" y2="18"></line></svg></div>
-                                            </div>
-                                            <div class="t-content">
-                                                <div class="t-uppercontent">
-                                                    <h5>Reboot</h5>
-                                                    <span class="">06 Apr, 2020</span>
-                                                </div>
-                                                <p>Server rebooted successfully</p>
-                                                <div class="tags">
-                                                    <div class="badge badge-warning">Reboot</div>
-                                                    <div class="badge badge-primary">Server</div>
-                                                </div>
-                                            </div>
-                                        </div>                                      
                                     </div>                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                        <div class="widget-four">
-                            <div class="widget-heading">
-                                <h5 class="">Visitors by Browser</h5>
-                            </div>
-                            <div class="widget-content">
-                                <div class="vistorsBrowser">
-                                    <div class="browser-list">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" y1="8" x2="12" y2="8"></line><line x1="3.95" y1="6.06" x2="8.54" y2="14"></line><line x1="10.88" y1="21.94" x2="15.46" y2="14"></line></svg>
-                                        </div>
-                                        <div class="w-browser-details">
-                                            <div class="w-browser-info">
-                                                <h6>Chrome</h6>
-                                                <p class="browser-count">65%</p>
-                                            </div>
-                                            <div class="w-browser-stats">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 65%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="browser-list">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-                                        </div>
-                                        <div class="w-browser-details">
-                                            
-                                            <div class="w-browser-info">
-                                                <h6>Safari</h6>
-                                                <p class="browser-count">25%</p>
-                                            </div>
-
-                                            <div class="w-browser-stats">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 35%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="browser-list">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                                        </div>
-                                        <div class="w-browser-details">
-                                            
-                                            <div class="w-browser-info">
-                                                <h6>Others</h6>
-                                                <p class="browser-count">15%</p>
-                                            </div>
-
-                                            <div class="w-browser-stats">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                        <div class="row widget-statistic">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                <div class="widget widget-one_hybrid widget-followers">
-                                    <div class="widget-heading">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                        </div>
-                                        <p class="w-value">31.6K</p>
-                                        <h5 class="">Followers</h5>
-                                    </div>
-                                    <div class="widget-content">    
-                                        <div class="w-chart">
-                                            <div id="hybrid_followers"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                <div class="widget widget-one_hybrid widget-referral">
-                                    <div class="widget-heading">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                                        </div>
-                                        <p class="w-value">1,900</p>
-                                        <h5 class="">Referral</h5>
-                                    </div>
-                                    <div class="widget-content">    
-                                        <div class="w-chart">
-                                            <div id="hybrid_followers1"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                                <div class="widget widget-one_hybrid widget-engagement">
-                                    <div class="widget-heading">
-                                        <div class="w-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                                        </div>
-                                        <p class="w-value">18.2%</p>
-                                        <h5 class="">Engagement</h5>
-                                    </div>
-                                    <div class="widget-content">    
-                                        <div class="w-chart">
-                                            <div id="hybrid_followers3"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
-                        <div class="widget widget-card-one">
-                            <div class="widget-content">
-
-                                <div class="media">
-                                    <div class="w-img">
-                                        <img src="assets/img/profile-32.jpg" alt="avatar">
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>Jimmy Turner</h6>
-                                        <p class="meta-date-time">Monday, Nov 18</p>
-                                    </div>
-                                </div>
-
-                                <p>"Duis aute irure dolor" in reprehenderit in voluptate velit esse cillum "dolore eu fugiat" nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-
-                                <div class="w-action">
-                                    <div class="card-like">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-                                        <span>551 Likes</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
-                        <div class="widget widget-five">
-                            <div class="widget-content">
-
-                                <div class="header">
-                                    <div class="header-body">
-                                        <h6>Pending Tasks</h6>
-                                        <p class="meta-date">Nov 2019</p>
-                                    </div>
-                                    <div class="task-action">
-                                        <div class="dropdown  custom-dropdown">
-                                            <a class="dropdown-toggle" href="#" role="button" id="pendingTask" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                            </a>
-
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pendingTask">
-                                                <a class="dropdown-item" href="javascript:void(0);">Add</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">View</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Update</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Clear All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="w-content">
-                                    <div class="">                                            
-                                        <p class="task-left">8</p>
-                                        <p class="task-completed"><span>12 Done</span></p>
-                                        <p class="task-hight-priority"><span>3 Task</span> with High priotity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-card-two">
-                            <div class="widget-content">
-
-                                <div class="media">
-                                    <div class="w-img">
-                                        <img src="assets/img/g-8.png" alt="avatar">
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>Dev Summit - New York</h6>
-                                        <p class="meta-date-time">Bronx, NY</p>
-                                    </div>
-                                </div>
-
-                                <div class="card-bottom-section">
-                                    <h5>4 Members Going</h5>
-                                    <div class="img-group">
-                                        <img src="assets/img/profile-19.jpg" alt="avatar">
-                                        <img src="assets/img/profile-6.jpg" alt="avatar">
-                                        <img src="assets/img/profile-8.jpg" alt="avatar">
-                                        <img src="assets/img/profile-3.jpg" alt="avatar">
-                                    </div>
-                                    <a href="javascript:void(0);" class="btn">View Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
@@ -522,6 +360,90 @@
     <script src="plugins/apex/apexcharts.min.js"></script>
     <script src="assets/js/dashboard/dash_2.js"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <!--Cash flow chart per kiosk js-->
+    <script>
+    //Cash flow per water kiosk
+    var d_1options1 = {
+        chart: {
+            height: 350,
+            type: 'bar',
+            toolbar: {
+              show: false,
+            },
+            dropShadow: {
+                enabled: true,
+                top: 1,
+                left: 1,
+                blur: 2,
+                color: '#acb0c3',
+                opacity: 0.7,
+            }
+        },
+        colors: ['#5c1ac3', '#ffbb44'],
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'  
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        legend: {
+              position: 'bottom',
+              horizontalAlign: 'center',
+              fontSize: '14px',
+              markers: {
+                width: 10,
+                height: 10,
+              },
+              itemMargin: {
+                horizontal: 0,
+                vertical: 8
+              }
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [{
+            name: 'Till Numbers',
+            data: [58, 44, 55, 57, 56, 61, 58, 63, 60, 66, 56, 63]
+        }, {
+            name: 'Cash',
+            data: [91, 76, 85, 101, 98, 87, 105, 91, 114, 94, 66, 70]
+        }],
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shade: 'light',
+            type: 'vertical',
+            shadeIntensity: 0.3,
+            inverseColors: false,
+            opacityFrom: 1,
+            opacityTo: 0.8,
+            stops: [0, 100]
+          }
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val
+                }
+            }
+        }
+      } 
+      var d_1C_3 = new ApexCharts(
+        document.querySelector("#cashFlow"),
+        d_1options1
+    );
+    d_1C_3.render();
+</script>
 
 </body>
 

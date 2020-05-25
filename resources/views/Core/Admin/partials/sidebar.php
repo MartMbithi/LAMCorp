@@ -29,7 +29,7 @@
                         <a href="manage_staff.php"> Manage Staffs  </a>
                     </li>
                     <li>
-                        <a href="add_payrolls.php">Add Payrolls </a>
+                        <a href="get_staff.php">Add Payrolls </a>
                     </li>                            
                     <li>
                         <a href="manage_payrolls.php"> Manage Payrolls </a>
