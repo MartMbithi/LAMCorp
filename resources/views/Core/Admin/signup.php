@@ -1,41 +1,82 @@
 <?php
     session_start();
     include('config/config.php');
-
-    if(isset($_POST['signup']))
+    error_reporting(E_ALL & ~E_NOTICE);
+    if(isset($_POST["signup"]))
     {
-        if(!filter_var($_POST['a_email'], FILTER_VALIDATE_EMAIL))
-        {
-            $err = 'Invalid Email'; //check if email is valid
+        $error = 0;
+        if (isset($_POST['a_name']) && !empty($_POST['a_name'])) {
+            $username=mysqli_real_escape_string($mysqli,trim($_POST['a_name']));
+        }else{
+            $error = 1;
+            $err="Username Cannot be empty.";
         }
-            //check if there is an account with that email
-            $checkEmail = mysqli_query($mysqli, "SELECT `a_email` FROM `LAMCorp_admin` WHERE `a_email` != '".$_POST['a_email']."'") or exit(mysqli_error($mysqli));
-            if(mysqli_num_rows($checkEmail))
-            {
-                $a_name = $_POST['a_name'];
-                $a_email = $_POST['a_email'];
-                $a_pwd = sha1(md5($_POST['a_pwd']));      
-                //Insert Captured information to a database table
-                $query="INSERT INTO LAMCorp_admin (a_name, a_email, a_pwd) VALUES (?,?,?)";
-                $stmt = $mysqli->prepare($query);
-                //bind paramaters
-                $rc=$stmt->bind_param('sss', $a_name, $a_email, $a_pwd);
-                $stmt->execute();
+        if (isset($_POST['a_email']) && !empty($_POST['a_email'])) {
+            $email=mysqli_real_escape_string($mysqli,trim($_POST['a_email']));
+        }else{
+            $error =1;
+            $err="Email cannot be empty.";
+        }
 
-                //declare a varible which will be passed to alert function
-                if($stmt)
+        if (isset($_POST['a_pwd']) && !empty($_POST['a_pwd'])) {
+            $psw=mysqli_real_escape_string($mysqli,trim($_POST['a_pwd']));
+        }else{
+            $error = 1;
+            $err="Password cannot be empty";
+        }
+
+        if (isset($_POST['re_password']) && !empty($_POST['re_password'])) {
+            $repsw=mysqli_real_escape_string($mysqli,trim($_POST['re_password']));
+            $password=password_hash('$psw',PASSWORD_BCRYPT);
+            $date=mysqli_real_escape_string($mysqli, trim('now()'));
+            if($psw!=$repsw)
                 {
-                 $success = "Account Created" && header("refresh:1; url=index.php");
+                $err =  "Password Do Not Match";
                 }
-                else 
-                {
-                    $err = "Please Try Again Or Try Later";
-                } 
+        }else{
+            $error = 1;
+            $err="Retype password cannot be empty";
+        }
+
+        
+        if(!$error)
+        {
+            $sql="SELECT * FROM  LAMCorp_admin WHERE  a_email='$email';";
+            $res=mysqli_query($mysqli,$sql);
+            if (mysqli_num_rows($res) > 0) {
+            // output data of each row
+            $row = mysqli_fetch_assoc($res);
+            if ($email==$row['email'])
+            {
+                $err =  "Email already exists";
             }
+            else
+            {
+                $err =  "Email already exists";
+            }
+        }
         else
         {
-            $err = "Email already registered";
-        }     
+            $a_name = $_POST['a_name'];
+            $a_email = $_POST['a_email'];
+            $a_pwd = sha1(md5($_POST['a_pwd']));      
+            //Insert Captured information to a database table
+            $query="INSERT INTO LAMCorp_admin (a_name, a_email, a_pwd) VALUES (?,?,?)";
+            $stmt = $mysqli->prepare($query);
+            //bind paramaters
+            $rc=$stmt->bind_param('sss', $a_name, $a_email, $a_pwd);
+            $stmt->execute();
+
+            //declare a varible which will be passed to alert function
+            if($stmt)
+            {
+                $success = "Account Created"; //&& header("refresh:1; url=index.php");
+            }
+            else 
+            {
+                $err = "Please Try Again Or Try Later";
+            } 
+        } }
     }
 ?>
 <!DOCTYPE html>
@@ -73,6 +114,15 @@
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                                     <input id="password" name="a_pwd" type="password" class="form-control" placeholder="Password">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </div>
+
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="password">CONFIRM PASSWORD</label>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <input id="password" name="re_password" type="password" class="form-control" placeholder="Password">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                 </div>
 
