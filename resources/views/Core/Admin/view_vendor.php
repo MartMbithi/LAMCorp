@@ -15,10 +15,10 @@
     </div>
     <!--  END NAVBAR  -->
     <?php
-        $staff_number = $_GET['staff_number'];
-        $ret="SELECT * FROM  LAMCorp_staffs WHERE staff_num = ?"; 
+        $vendor_number = $_GET['vendor_number'];
+        $ret="SELECT * FROM  LAMCorp_vendors WHERE v_number = ?"; 
         $stmt= $mysqli->prepare($ret) ;
-        $stmt->bind_param('s', $staff_number);
+        $stmt->bind_param('s', $vendor_number);
         $stmt->execute() ;//ok
         $res=$stmt->get_result();
         $cnt=1;
@@ -37,9 +37,9 @@
                             <nav class="breadcrumb-one" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">HRM</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Staff</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><span>View <?php echo $row->staff_name;?></span></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Vendor</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Vendors</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><span>View <?php echo $row->v_name;?></span></li>
                                 </ol>
                             </nav>
                         </div>
@@ -71,46 +71,30 @@
                             <div class="user-profile layout-spacing">
                                 <div class="widget-content widget-content-area">
                                     <div class="d-flex justify-content-between">
-                                        <h3 class="">Profile</h3>
-                                        <a href="update_staff.php?staff_number=<?php echo $row->staff_num;?>" class="mt-2 edit-profile"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
+                                        <h3 class="">Vendor Profile</h3>
+                                        <a href="update_vendor.php?vendor_number=<?php echo $row->v_number;?>" class="mt-2 edit-profile"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
                                     </div>
                                     <div class="text-center user-info">
-                                        <img src="assets/img/staff/<?php echo $row->staff_icon;?>" class="img-fluid" alt="avatar">
-                                        <p class=""><?php echo $row->staff_name;?></p>
+                                        <img src="assets/img/vendor/<?php echo $row->v_icon;?>" class="img-fluid" alt="avatar">
+                                        <p class=""><?php echo $row->v_name;?></p>
                                     </div>
                                     <div class="user-info-list">
 
                                         <div class="">
                                             <ul class="contacts-block list-unstyled">
                                                 <li class="contacts-block__item">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg> <?php echo $row->staff_num;?>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg> <br> <?php echo $row->v_number;?>
                                                 </li>
                                                 <li class="contacts-block__item">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><?php echo $row->staff_dob;?>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <br> <?php echo $row->v_pobox;?> <br> <?php echo $row->v_location;?>
                                                 </li>
                                                 <li class="contacts-block__item">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><?php echo $row->staff_adr;?>
+                                                    <a href="mailto:<?php echo $row->v_email;?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <br> <?php echo $row->v_email;?></a>
                                                 </li>
                                                 <li class="contacts-block__item">
-                                                    <a href="mailto:<?php echo $row->staff_email;?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><?php echo $row->staff_email;?></a>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <br> <?php echo $row->v_phoneno;?>
                                                 </li>
-                                                <li class="contacts-block__item">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <?php echo $row->staff_phoneno;?>
-                                                </li>
-                                                <li class="contacts-block__item">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> 
-                                                Can Login? 
-                                                <?php 
-                                                    if($row->allow_login == '0')
-                                                    {
-                                                        echo "<span class='badge badge-success'>Yes</span>";
-                                                    }
-                                                    else
-                                                    {
-                                                        echo "<span class='badge badge-danger'>No</span>";
-                                                    }
-                                                ?>
-                                                </li>
+                                                
                                                 <!--<li class="contacts-block__item">
                                                     <ul class="list-inline">
                                                         <li class="list-inline-item">
@@ -252,8 +236,8 @@
 
                             <div class="bio layout-spacing ">
                                 <div class="widget-content widget-content-area">
-                                    <h3 class="">Bio</h3>
-                                    <p><?php echo $row->staff_bio;?></p>
+                                    <h3 class="">Products | Items | Goods | Equipments Offered</h3>
+                                    <p><?php echo $row->v_items;?></p>
                                     <!--<div class="bio-skill-box">
 
                                         <div class="row">
