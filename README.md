@@ -1,8 +1,12 @@
 
 <p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/LAMCorp.png" width="400"></p> 
-
 ## About LAMCorp
 The LAMCorp Suite provides the professional tools for monitoring transparency and management in water dispensing firms.
+
+## Glance Of LAMCorp Suite 😉😉😉
+<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/1.png"></p>
+<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/2.png"></p>
+<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/3.png"></p>
 
 ## Features / Modules
 * HRM Module
@@ -37,6 +41,7 @@ The LAMCorp Suite provides the professional tools for monitoring transparency an
     * Taxes, Expenses and Bills Records
     
  * ETC...
+
  
  ## License
 
