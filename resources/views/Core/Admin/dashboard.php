@@ -135,7 +135,7 @@
                             <div class="widget-content">
                                 <div class="w-content">
                                     <div class="w-info">
-                                        <h6 class="value">Ksh 45,141</h6>
+                                        <h6 class="value">Ksh <?php echo $netSalary;?></h6>
                                         <p class="text-danger">Total Expenses</p>
                                     </div>
                                     <div class="">
@@ -204,7 +204,7 @@
                             <div class="widget-content">
                                 <div class="w-content">
                                     <div class="w-info">
-                                        <h6 class="value"> 45,141</h6>
+                                        <h6 class="value"><?php echo $vendors;?></h6>
                                         <p class="">Vendors</p>
                                     </div>
                                     <div class="">
