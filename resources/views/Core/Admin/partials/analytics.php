@@ -56,7 +56,14 @@
     $stmt->bind_result($vendors);
     $stmt->fetch();
     $stmt->close();
-//6.Water Points
+
+    //6.Water Points
+    $query ="SELECT count(*) FROM LAMCorp_waterPoints";
+    $stmt = $mysqli->prepare($query);
+    $stmt ->execute();
+    $stmt->bind_result($waterPoints);
+    $stmt->fetch();
+    $stmt->close();
 
 //Cash Flow Computations
   
