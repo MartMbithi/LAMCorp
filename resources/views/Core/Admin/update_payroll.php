@@ -19,14 +19,16 @@
         $taxation = $_POST['taxation'];
         $comments = $_POST['comments'];
         $payroll_id = $_GET['payroll_id'];
-      
+        $alw = $_POST['alw'];
+        $bank_name = $_POST['bank_name'];
+        $bank_acc = $_POST['bank_acc'];     
     
 
         //Insert Captured information to a database table
-        $query="UPDATE  LAMCorp_payrolls SET  payroll_code = ?, pay_record = ?, salary = ?, taxation = ?, comments = ? WHERE payroll_id =?";
+        $query="UPDATE  LAMCorp_payrolls SET alw= ?, bank_name=?, bank_acc =?, payroll_code = ?, pay_record = ?, salary = ?, taxation = ?, comments = ? WHERE payroll_id =?";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
-        $rc=$stmt->bind_param('sssssi', $payroll_code, $pay_record, $salary, $taxation, $comments, $payroll_id);
+        $rc=$stmt->bind_param('ssssssssi', $alw, $bank_name, $bank_acc, $payroll_code, $pay_record, $salary, $taxation, $comments, $payroll_id);
         $stmt->execute();
         //declare a varible which will be passed to alert function
         if($stmt)
@@ -165,9 +167,22 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <label for="inputAddress2">Total Monthly Deductions</label>
-                                                    <input type="text" required name="taxation" value=<?php echo $row->taxation;?> class="form-control" id="inputAddress2" >
+                                                    <input type="text" required name="taxation" value="<?php echo $row->taxation;?>" class="form-control" id="inputAddress2" >
                                                 </div>
-                                                
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputAddress2">Total Monthly Allowances</label>
+                                                    <input type="text" required name="alw" value="<?php echo $row->allowances;?>" class="form-control" id="inputAddress2" >
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputAddress2">Bank Name</label>
+                                                    <input type="text" required name="bank_name" value="<?php echo $row->bank_name;?>" class="form-control" id="inputAddress2" >
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputAddress2">Bank Account Number</label>
+                                                    <input type="text" required name="bank_acc" value="<?php echo $row->bank_acc;?>" class="form-control" id="inputAddress2" >
+                                                </div>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="inputAddress">Comments</label>
