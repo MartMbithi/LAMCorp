@@ -23,14 +23,17 @@
         $salary = $_POST['salary'];
         $taxation = $_POST['taxation'];
         $comments = $_POST['comments'];
+        $alw = $_POST['alw'];
+        $bank_name = $_POST['bank_name'];
+        $bank_acc = $_POST['bank_acc'];
       
     
 
         //Insert Captured information to a database table
-        $query="INSERT INTO LAMCorp_payrolls (staff_name, staff_email, staff_id, staff_number, staff_idno, payroll_code, pay_record, salary, taxation, comments) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $query="INSERT INTO LAMCorp_payrolls (alw, bank_name, bank_acc, staff_name, staff_email, staff_id, staff_number, staff_idno, payroll_code, pay_record, salary, taxation, comments) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
-        $rc=$stmt->bind_param('ssssssssss',$staff_name, $staff_email, $staff_id, $staff_number, $staff_idno, $payroll_code, $pay_record, $salary, $taxation, $comments);
+        $rc=$stmt->bind_param('sssssssssssss',$alw, $bank_name, $bank_acc, $staff_name, $staff_email, $staff_id, $staff_number, $staff_idno, $payroll_code, $pay_record, $salary, $taxation, $comments);
         $stmt->execute();
 
         //declare a varible which will be passed to alert function
@@ -167,11 +170,24 @@
                                                     </div>
                                                 </div>                                   
                                             <div class="form-row">
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                     <label for="inputAddress2">Total Monthly Deductions</label>
                                                     <input type="text" required name="taxation" class="form-control" id="inputAddress2" >
                                                 </div>
-                                                
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputAddress2">Total Monthly Allowances</label>
+                                                    <input type="text" required name="alw" class="form-control" id="inputAddress2" >
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputAddress2">Bank Name</label>
+                                                    <input type="text" required name="bank_name" class="form-control" id="inputAddress2" >
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputAddress2">Bank Account Number</label>
+                                                    <input type="text" required name="bank_acc" class="form-control" id="inputAddress2" >
+                                                </div>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="inputAddress">Comments</label>

@@ -5,10 +5,12 @@
     //include('partials/analytics.php');
     check_login();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include("partials/head.php");?>
 <body>
+    
     <!--  BEGIN NAVBAR  -->
     <div class="header-container fixed-top">
         <?php include("partials/header.php");?>
@@ -39,7 +41,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">HRM</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Payrolls</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Payrolls</a></li> 
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">Manage</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><span>Generate <?php echo $row->staff_name;?> Payslip</span></li>
                                 </ol>
@@ -71,45 +73,93 @@
                                 <div class="hamburger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu chat-menu d-xl-none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
                             </div>
                             <div class="doc-container">
-                                <div class="invoice-container">
-                                    <div class="invoice-inbox">
-                                        <div class="invoice-header-section">
-                                            <h4 class="inv-number"></h4>
-                                            <div class="invoice-action">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer action-print" data-toggle="tooltip" data-placement="top" data-original-title="Reply"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                                            </div>
-                                        </div>
-                                        <div class="row">
+                                <div class="tab-title">
+                                    <div class="row">
                                         <div class="col-md-12 col-sm-12 col-12">
-
-                                            <ul class="nav nav-pills inv-list-container d-block active " id="pills-tab" role="tablist">
-                                                <li class="nav-item">
-                                                    <div class="nav-link list-actions active" id="invoice-00001" data-invoice-id="00001">
-                                                        <div class="f-m-body">
-                                                            <div class="f-head">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                                                            </div>
-                                                            <div class="f-body">
-                                                                <p class="invoice-number">Invoice #00001</p>
-                                                                <p class="invoice-customer-name"><span>To:</span> Jesse Cory</p>
-                                                                <p class="invoice-generated-date">Date: 12 Apr 2019</p>
+                                            <div class="search">
+                                                <input type="text" class="form-control" placeholder="Search...">
+                                            </div>
+                                            <ul class="nav nav-pills inv-list-container d-block" id="pills-tab" role="tablist">
+                                                <?php 
+                                                    $payroll_id = $_GET['payroll_id'];
+                                                    $ret="SELECT * FROM  LAMCorp_payrolls WHERE payroll_id = ?"; 
+                                                    $stmt= $mysqli->prepare($ret) ;
+                                                    $stmt->bind_param('i', $payroll_id);
+                                                    $stmt->execute() ;//ok
+                                                    $res=$stmt->get_result();
+                                                    $cnt=1;
+                                                    while($row=$res->fetch_object())
+                                                    {
+                                                ?>
+                                                    <li class="nav-item">
+                                                        <div class="nav-link list-actions" id="invoice-00001" data-invoice-id="00001">
+                                                            <div class="f-m-body">
+                                                                <div class="f-head">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                                                </div>
+                                                                <div class="f-body">
+                                                                    <p class="invoice-number"><?php echo $row->payroll_code;?></p>
+                                                                    <p class="invoice-customer-name"><span>To:</span><?php echo $row->staff_name;?></p>
+                                                                    <p class="invoice-generated-date">Date: <?php echo date("d-M-Y", strtotime($row->created_at));?></p>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
+                                                <?php }?>
                                             </ul>
                                         </div>
-                                        <div id="ct" class="">
-                                            <div class="invoice-00001  active">
+                                    </div>
+                                </div>
+                                <?php 
+                                    $payroll_id = $_GET['payroll_id'];
+                                    $ret="SELECT * FROM  LAMCorp_payrolls WHERE payroll_id = ?"; 
+                                    $stmt= $mysqli->prepare($ret) ;
+                                    $stmt->bind_param('i', $payroll_id);
+                                    $stmt->execute() ;//ok
+                                    $res=$stmt->get_result();
+                                    $cnt=1;
+                                    while($row=$res->fetch_object())
+                                    {
+                                        //compute net salary
+                                        //$totalSalary = ($row->salary) + ($row->allowances);
+                                        //$netSalary = $totalSalary - ($row->taxation);
+
+                                        $salary = $row->salary;
+                                        $alw = $row->alw;
+                                        $deductions = $row->taxation;
+
+                                        $cumulativeSalary = $salary + $alw;
+                                        $netSalary = $cumulativeSalary - $deductions;
+
+
+                                ?>
+                                <div class="invoice-container">
+                                    <div class="invoice-inbox">
+
+                                        <div class="inv-not-selected">
+                                            <p>Open a payslip from the list.</p>
+                                        </div>
+
+                                        <div class="invoice-header-section">
+                                            <h4 class="text-success"><?php echo $row->payroll_code;?></h4>
+                                            <div class="">
+                                                <svg id="print" onclick="printContent('printPayslip');" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer action-print" data-toggle="tooltip" data-placement="top" data-original-title="Print"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="printPayslip" class="">
+                                            
+                                            <div class="invoice-00001">
                                                 <div class="content-section  animated animatedFadeInUp fadeInUp">
+
                                                     <div class="row inv--head-section">
+
                                                         <div class="col-sm-6 col-12">
-                                                            <h3 class="in-heading">INVOICE</h3>
+                                                            <h3 class="in-heading">Payslip</h3>
                                                         </div>
                                                         <div class="col-sm-6 col-12 align-self-center text-sm-right">
                                                             <div class="company-info">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hexagon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-                                                                <h5 class="inv-brand-name">CORK</h5>
+                                                                <h5 class="inv-brand-name">LAMCorp Inc</h5>
                                                             </div>
                                                         </div>
                                                         
@@ -118,21 +168,21 @@
                                                     <div class="row inv--detail-section">
 
                                                         <div class="col-sm-7 align-self-center">
-                                                            <p class="inv-to">Invoice To</p>
+                                                            <p class="inv-to">Payslip To</p>
                                                         </div>
                                                         <div class="col-sm-5 align-self-center  text-sm-right order-sm-0 order-1">
-                                                            <p class="inv-detail-title">From : XYZ Company</p>
+                                                            <p class="inv-detail-title">From : LAMCorp Inc</p>
                                                         </div>
                                                         
                                                         <div class="col-sm-7 align-self-center">
-                                                            <p class="inv-customer-name">Jesse Cory</p>
-                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
-                                                            <p class="inv-email-address">redq@company.com</p>
+                                                            <p class="inv-customer-name"><?php echo $row->staff_name;?></p>
+                                                            <p class="inv-street-addr"><?php echo $row->staff_number;?></p>
+                                                            <p class="inv-email-address"><?php echo $row->staff_email;?></p>
                                                         </div>
                                                         <div class="col-sm-5 align-self-center  text-sm-right order-2">
-                                                            <p class="inv-list-number"><span class="inv-title">Invoice Number : </span> <span class="inv-number">[invoice number]</span></p>
-                                                            <p class="inv-created-date"><span class="inv-title">Invoice Date : </span> <span class="inv-date">20 Aug 2019</span></p>
-                                                            <p class="inv-due-date"><span class="inv-title">Due Date : </span> <span class="inv-date">26 Aug 2019</span></p>
+                                                            <p class="inv-list-number"><span class="inv-title">Number : </span> <span class="text-primary"><?php echo $row->payroll_code;?></span></p>
+                                                            <p class="inv-created-date"><span class="inv-title">Payslip Date : </span> <span class="inv-date"><?php echo date("d M Y", strtotime($row->created_at));?></span></p>
+                                                            <p class="inv-due-date"><span class="inv-title">Pay Month : </span> <span class="inv-date"><?php echo $row->pay_record;?></span></p>
                                                         </div>
                                                     </div>
 
@@ -142,34 +192,18 @@
                                                                 <table class="table">
                                                                     <thead class="">
                                                                         <tr>
-                                                                            <th scope="col">S.No</th>
-                                                                            <th scope="col">Items</th>
-                                                                            <th class="text-right" scope="col">Qty</th>
-                                                                            <th class="text-right" scope="col">Unit Price</th>
-                                                                            <th class="text-right" scope="col">Amount</th>
+                                                                            <th scope="col">Monthly Salary</th>
+                                                                            <th class="text-right" scope="col">Total Monthly Allowances</th>
+                                                                            <th class="text-right" scope="col">Total Monthly Deductions</th>
+                                                                            <th class="text-right" scope="col">Net Salary</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td>1</td>
-                                                                            <td>Electric Shaver</td>
-                                                                            <td class="text-right">20</td>
-                                                                            <td class="text-right">$300</td>
-                                                                            <td class="text-right">$2800</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2</td>
-                                                                            <td>Earphones</td>
-                                                                            <td class="text-right">49</td>
-                                                                            <td class="text-right">$500</td>
-                                                                            <td class="text-right">$7000</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>3</td>
-                                                                            <td>Wireless Router</td>
-                                                                            <td class="text-right">30</td>
-                                                                            <td class="text-right">$500</td>
-                                                                            <td class="text-right">$3500</td>
+                                                                            <td>Ksh <?php echo $row->salary;?></td>
+                                                                            <td class="text-right">Ksh <?php echo $row->alw;?></td>
+                                                                            <td class="text-right">Ksh <?php echo $row->taxation;?></td>
+                                                                            <td class="text-right">Ksh <?php echo $netSalary;?></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -188,13 +222,13 @@
                                                                         <p class=" inv-subtitle">Bank Name: </p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-12">
-                                                                        <p class="">Bank of America</p>
+                                                                        <p class=""><?php echo $row->bank_name;?></p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-12">
                                                                         <p class=" inv-subtitle">Account Number : </p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-12">
-                                                                        <p class="">1234567890</p>
+                                                                        <p class=""><?php echo $row->bank_acc;?></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -203,28 +237,28 @@
                                                             <div class="inv--total-amounts text-sm-right">
                                                                 <div class="row">
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="">Sub Total: </p>
+                                                                        <p class="">Monthly Salary</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">$13300</p>
+                                                                        <p class="">Ksh <?php echo $row->salary;?></p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="">Tax Amount: </p>
+                                                                        <p class="">Monthly Deductions </p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">$700</p>
+                                                                        <p class="">Ksh <?php echo $row->taxation;?></p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class=" discount-rate">Discount : <span class="discount-percentage">5%</span> </p>
+                                                                        <p class="">Monthly Allowances </p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">$700</p>
+                                                                        <p class="">Ksh <?php echo $row->alw;?></p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7 grand-total-title">
-                                                                        <h4 class="">Grand Total : </h4>
+                                                                        <h4 class="">Net Salary</h4>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5 grand-total-amount">
-                                                                        <h4 class="">$14000</h4>
+                                                                        <h4 class="">Ksh <?php echo $netSalary;?></h4>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -235,19 +269,16 @@
                                             </div> 
                                         </div>
                                     </div>
-
                                     <div class="inv--thankYou">
                                         <div class="row">
                                             <div class="col-sm-12 col-12">
-                                                <p class="">Thank you for doing Business with us.</p>
+                                                <p class="">Thank you for being a LAMCorp Inc loyal employee.</p>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-                                
+                                <?php }?>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -257,7 +288,8 @@
 
         </div>
         <!-- END MAIN CONTAINER -->
-<?php }?>
+    <?php }?>
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="bootstrap/js/popper.min.js"></script>
@@ -273,6 +305,17 @@
     <script src="assets/js/custom.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <script src="assets/js/apps/invoice.js"></script>
+    <!--Print-->
+    <script>
+        function printContent(el)
+        {
+            var restorepage = $('body').html();
+            var printcontent = $('#' + el).clone();
+            $('body').empty().html(printcontent);
+            window.print();
+            $('body').html(restorepage);
+        }
+</script>
 </body>
 
 </html>
