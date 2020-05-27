@@ -112,7 +112,7 @@
                             <div class="widget-content">
                                 <div class="w-content">
                                     <div class="w-info">
-                                        <h6 class="value">Ksh 45,141</h6>
+                                        <h6 class="value">Ksh <?php echo $incomes;?></h6>
                                         <p class="text-primary">Total Incomes</p>
                                     </div>
                                     <div class="">
@@ -135,7 +135,7 @@
                             <div class="widget-content">
                                 <div class="w-content">
                                     <div class="w-info">
-                                        <h6 class="value">Ksh <?php echo $netSalary;?></h6>
+                                        <h6 class="value">Ksh <?php echo $total_expenses;?></h6>
                                         <p class="text-danger">Total Expenses</p>
                                     </div>
                                     <div class="">
@@ -152,28 +152,9 @@
                     </div>
                     <!-- ./ Expenses -->
 
-                    <!-- Profit --> 
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
-                        <div class="widget widget-card-four">
-                            <div class="widget-content">
-                                <div class="w-content">
-                                    <div class="w-info">
-                                        <h6 class="value">KSh 45,141</h6>
-                                        <p class="text-success">Total Profit</p>
-                                    </div>
-                                    <div class="">
-                                        <div class="w-icon text-success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--<div class="progress">
-                                    <div class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Profit -->
+                    <!-- Profit | Loss  --> 
+                    <?php echo $status;?>
+                    <!-- Profit | Loss -->
 
                     <!-- Staffs -->
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
@@ -304,28 +285,33 @@
                                 <div class="mt-container mx-auto">
                                     <div class="timeline-line">
                                         <!--Payments Via TILL numbers Sort using timestamp-->
-                                        <div class="item-timeline timeline-new">
-                                            <div class="t-dot">
-                                                <div class="t-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                                            </div>
-                                            <div class="t-content">
+                                        <?php
+                                            $ret="SELECT * FROM `LAMCorp_payments` ORDER BY `LAMCorp_payments`.`created_at` DESC "; 
+                                            $stmt= $mysqli->prepare($ret) ;
+                                            $stmt->execute() ;//ok
+                                            $res=$stmt->get_result();
+                                            $cnt=1;
+                                            while($row=$res->fetch_object())
+                                            {
+                                        ?>
+                                            <div class="item-timeline timeline-new">
+                                                <div class="t-dot">
+                                                    <div class="t-success"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                                </div>
+                                                <div class="t-content">
+                                                
                                                 <div class="t-uppercontent">
-                                                    <h5>CONFIRMED</h5>
+                                                    <h5><?php echo $row->transaction_code;?> Confirmed.</h5>
                                                 </div>
                                                 <p>
-                                                    <span class="">27 Feb, 2020</span>
                                                     <!--Indicate transaction ID, Customer Phone Number, Customer Name-->
-                                                    <span>Updated</span> Server Logs
+                                                    Received <span class="text-success">Ksh <?php echo $row->amount;?></span> from <span class="text-primary"><?php echo strtoupper($row->client_name);?> <?php echo $row->client_phone;?></span> on 
+                                                    <?php echo date("d/M/Y", strtotime($row->created_at));?> at <?php echo date("g:ia", strtotime($row->created_at));?>.
+
                                                 </p>
-                                                <div class="tags">
-                                                <!--Indicate the till number provider that is 
-                                                Safaricom(Mpesa) = Green, Airtel(Airtel Money) = Red and Telcom (T-Kash) = Blue -->
-                                                    <div class="badge badge-primary">Logs</div>
-                                                    <div class="badge badge-success">CPanel</div>
-                                                    <div class="badge badge-warning">Update</div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php }?>
                                     </div>                                    
                                 </div>
                             </div>

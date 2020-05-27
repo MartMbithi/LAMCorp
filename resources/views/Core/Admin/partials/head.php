@@ -66,5 +66,24 @@
                </script>
 
        <?php } ?>
+       <!--Ajax script to compute the price per litres -->
+        <script>
+                function getPrice(val)
+            {
+                    $.ajax
+                    ({
+                        //get price 
+                    type: "POST",
+                    url: "ajax.php",
+                    data:'purchasedLitres='+val,
+                    success: function(data){
+                    //alert(data);
+                    $('#Amount').val(data);
+                    }
+                });
+
+            }
+        </script>
+
 
 </head>
