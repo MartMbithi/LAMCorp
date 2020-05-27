@@ -4,25 +4,6 @@
     include('config/checklogin.php');
     //include('partials/analytics.php');
     check_login();
-    //Delete Tariff
-    if(isset($_GET['delete_tariff']))
-   {
-         $id=intval($_GET['delete_tariff']);
-         $adn="DELETE FROM  LAMCorp_waterTariffs  WHERE t_id = ?";
-         $stmt= $mysqli->prepare($adn);
-         $stmt->bind_param('i',$id);
-         $stmt->execute();
-         $stmt->close();	 
-   
-            if($stmt)
-            {
-                $success = "Deleted" && header("refresh:1; url=manage_watertariff.php");
-            }
-            else
-            {
-                $err = "Try Again Later";
-            }
-     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +28,9 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Water Tariffs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Manage Water Tariffs</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Payments</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Payments</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>View Payments</span></li>
                             </ol>
                         </nav>
 
@@ -81,16 +63,23 @@
                                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Tariff Code</th>
-                                            <th>Tariff Name</th>
-                                            <th>Water Cost Per Litre</th>
+                                            <th>Pay Number</th>
+                                            <th>Litres</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Till Number</th>
+                                            <th>Code</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $ret="SELECT * FROM  LAMCorp_waterTariffs "; 
+                                            $kiosk_number = $_GET['kiosk_number'];
+                                            $ret="SELECT * FROM  LAMCorp_payments WHERE kiosk_number = ?"; 
                                             $stmt= $mysqli->prepare($ret) ;
+                                            $stmt->bind_param('s', $kiosk_number);
                                             $stmt->execute() ;//ok
                                             $res=$stmt->get_result();
                                             $cnt=1;
@@ -98,19 +87,22 @@
                                             {
                                         ?>
                                             <tr>
-                                                <td><?php echo $row->t_code;?></td>
-                                                <td><?php echo $row->t_name;?></td>
-                                                <td>Ksh <?php echo $row->cost_per_litre;?></td>
+                                                <td><?php echo $row->pay_number;?></td>
+                                                <td><?php echo $row->litres_purchased;?> Litres</td>
+                                                <td><?php echo $row->client_name;?></td>
+                                                <td><?php echo $row->client_phone;?></td>
+                                                <td><?php echo $row->till_number;?></td>
+                                                <td><?php echo $row->transaction_code;?></td>
+                                                <td>Ksh <?php echo $row->amount;?></td>
+                                                <td><?php echo date("d/M/Y g:ia", strtotime($row->created_at));?></td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-dark btn-sm">Manage Tariff</button>
+                                                        <button type="button" class="btn btn-dark btn-sm">Manage</button>
                                                         <button type="button" class="btn btn-dark btn-sm dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                        <a class="dropdown-item text-primary" href="update_tariff.php?tariff=<?php echo $row->t_code;?>">Update Tariff</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item text-danger" href="manage_watertariff.php?delete_tariff=<?php echo $row->t_id;?>">Delete Tariff</a>
+                                                            <a class="dropdown-item text-danger" href="manage_payments.php?delete=<?php echo $row->pay_id;?>">Delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -129,6 +121,7 @@
         </div>
         <!--  END CONTENT AREA  -->
     </div>
+
     <!-- END MAIN CONTAINER -->
     
     

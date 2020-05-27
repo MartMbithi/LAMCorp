@@ -115,7 +115,7 @@
                         <a href="manage_tillnumbers.php"> Manage Till Nos </a>
                     </li>
                     <li>
-                        <a href="add_payment.php"> Add Payment </a>
+                        <a href="get_waterpoints.php"> Add Payment </a>
                     </li>
                     <li>
                         <a href="manage_payments.php"> Manage Payments </a>
