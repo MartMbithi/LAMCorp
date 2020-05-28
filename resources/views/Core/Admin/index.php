@@ -37,7 +37,7 @@
                     <div class="form-content">
 
                         <h1 class="">LAMCorp Suite</h1>
-                        <p class="">Enter your email or username and email</p>
+                        <p class="">Enter your email and password to log in</p>
                         
                         <form method="post" class="text-left">
                             <div class="form">
