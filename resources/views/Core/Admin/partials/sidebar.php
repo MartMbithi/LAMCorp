@@ -155,14 +155,14 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="taxes" data-parent="#accordionExample">
                     <li>
-                        <a href="add_tax.php"> Add Tax </a>
+                        <a href="add_tax.php"> Add Tax Rates </a>
                     </li>
                     <li>
                         <a href="manage_taxes.php"> Manage Taxes </a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="compute_taxes.php">Tax Computations</a>
-                    </li>
+                    </li>-->
                     
                 </ul>
             </li>
