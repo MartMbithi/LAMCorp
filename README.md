@@ -48,10 +48,10 @@ The LAMCorp Suite provides the professional tools for monitoring transparency an
  * ETC...
      
 ## Contributors
- <a href="https://github.com/MartMbithi/LAMCorp/graphs/contributors">
+<a href="https://github.com/MartMbithi/LAMCorp/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=MartMbithi/LAMCorp" />
 </a>
-Made with [contributors-img](https://contributors-img.web.app).
+
 
  ## Bug List 🕷️🕷️
  * The following are the known bugs so far 
