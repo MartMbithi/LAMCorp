@@ -5,7 +5,7 @@
 
 The LAMCorp Suite provides the professional tools for monitoring transparency and management in water dispensing firms.
 
-## Glance Of LAMCorp Suite 😉😉😉
+## Glance Of LAMCorp Suite 😉
 
 <p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/1.png"></p>
 <p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/4.png"></p>
@@ -46,8 +46,17 @@ The LAMCorp Suite provides the professional tools for monitoring transparency an
     * Taxes, Expenses and Bills Records
     
  * ETC...
+     
+## Contributors
+ <a href="https://github.com/MartMbithi/LAMCorp/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=MartMbithi/LAMCorp" />
+</a>
+Made with [contributors-img](https://contributors-img.web.app).
 
- 
+ ## Bug List 🕷️🕷️
+ * The following are the known bugs so far 
+    * Printing from LAMCorp Suite Bug `Prints Blank Page`
+    
  ## License
 
 The LAMCorp Suite is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
