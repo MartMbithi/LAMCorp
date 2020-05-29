@@ -85,7 +85,6 @@
     $stmt->fetch();
     $stmt->close();
 
-//Cash Flow Computations
 
 
 
@@ -146,6 +145,83 @@ else
     </div>
     ";
 }
+/*
+Cash Flow Computations
+1.Get All Till Numbers
+2.Get Sum Payment Per Till Numbers
+*/
+    //Get MPESA Till number
+    $saf="SELECT * FROM  LAMCorp_tills WHERE  till_service_provider = 'Safaricom' ";
+    $safstmt= $mysqli->prepare($saf);
+    $safstmt->execute();
+    $safres=$safstmt->get_result();
+    while($row=$safres->fetch_object())
+    {
+        $Safaricom = $row->till_number;
+    }
+
+    //Get Airtel Money Till Number
+    $airtel="SELECT * FROM  LAMCorp_tills WHERE  till_service_provider = 'Airtel'";
+    $airtelstmt = $mysqli->prepare($airtel);
+    $airtelstmt->execute();
+    $airtelres=$airtelstmt->get_result();
+    while($row=$airtelres->fetch_object())
+    {
+        $Airtel = $row->till_number;
+    }
+
+    //Get TKash till number
+    $telkom="SELECT * FROM  LAMCorp_tills WHERE  till_service_provider = 'Telkom'";
+    $telkomstmt = $mysqli->prepare($telkom);
+    $telkomstmt->execute();
+    $telkomres=$telkomstmt->get_result();
+    while($row=$telkomres->fetch_object())
+    {
+        $Telkom = $row->till_number;
+    }
+
+    //Get amount paid under mpesa
+    $query ="SELECT SUM(amount) FROM LAMCorp_payments WHERE till_number = '$Safaricom'";
+    $stmt = $mysqli->prepare($query);
+    $stmt ->execute();
+    $stmt->bind_result($SafPayments);
+    $stmt->fetch();
+    $stmt->close();
+
+    //Get amount  paid under airtel money
+    $query ="SELECT SUM(amount) FROM LAMCorp_payments WHERE till_number = '$Airtel'";
+    $stmt = $mysqli->prepare($query);
+    $stmt ->execute();
+    $stmt->bind_result($AirtelPayments);
+    $stmt->fetch();
+    $stmt->close();
+
+    //Get amount paid under tkash
+    $query ="SELECT SUM(amount) FROM LAMCorp_payments WHERE till_number = '$Telkom'";
+    $stmt = $mysqli->prepare($query);
+    $stmt ->execute();
+    $stmt->bind_result($TelkomPayments);
+    $stmt->fetch();
+    $stmt->close();
+
+/*
+Expenditure and Incomes
+*/
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
 
   
 ?>
