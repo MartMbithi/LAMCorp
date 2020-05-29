@@ -192,6 +192,22 @@
                     </li>
                 </ul>
             </li>
+            <li class="menu">
+                <a href="#pwdresets" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <span>Pass Resets</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled" id="pwdresets" data-parent="#accordionExample">
+                    <li>
+                        <a href="reset.php">Reset</a>
+                    </li>
+                </ul>
+            </li>
 
             <li class="menu">
                 <a href="#reports" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -205,10 +221,13 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="reports" data-parent="#accordionExample">
                     <li>
-                        <a href="incomesummaries.php"> Income salaries </a>
+                        <a href="incomesummaries.php"> Income Summaries </a>
                     </li>
                     <li>
                         <a href="expenses.php"> Expense Summaries </a>
+                    </li>
+                    <li>
+                        <a href="bills.php">Bills Records</a>
                     </li>
                     <li>
                         <a href="staffs.php"> Staff Records </a>
@@ -217,23 +236,9 @@
                         <a href="vendors.php"> Vendors records </a>
                     </li>
                     <li>
-                        <a href="water_points.php"> Water Points records </a>
+                        <a href="water_points.php"> Water Points</a>
                     </li>
-                    <li>
-                        <a href="tariffs.php"> Water Tariff records </a>
-                    </li>
-                    <li>
-                        <a href="financial.php"> Financial records </a>
-                    </li>
-                    <li>
-                        <a href="taxes.php">Taxes Records</a>
-                    </li>
-                    <li>
-                        <a href="expenses.php">Expenses Records</a>
-                    </li>
-                    <li>
-                        <a href="bills.php">Bills Records</a>
-                    </li>
+                    
                 </ul>
             </li>
         </ul>

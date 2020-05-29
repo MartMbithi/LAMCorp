@@ -41,10 +41,23 @@
     $stmt->fetch();
     $stmt->close();
 
+    /*
+        2.2 Get Bills Expenses
+    */
+
+    $query ="SELECT SUM(exp_amt) FROM LAMCorp_expenses WHERE kiosk_number !=''  ";
+    $stmt = $mysqli->prepare($query);
+    $stmt ->execute();
+    $stmt->bind_result($expenses);
+    $stmt->fetch();
+    $stmt->close();
+
+
+
     //Compute The Net Salary Expenses
     $CumulativeSal = $salary + $alw;
     $netSalary = $CumulativeSal - $deductions;
-    $total_expenses = $netSalary;
+    $total_expenses = $netSalary+$expenses;
     //====================================================================================//
 
 //3.Total Profit

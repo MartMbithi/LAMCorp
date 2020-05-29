@@ -4,25 +4,25 @@
     include('config/checklogin.php');
     //include('partials/analytics.php');
     check_login();
-    //Delete Expense
-    if(isset($_GET['delete_expense']))
-   {
-         $id=intval($_GET['delete_expense']);
-         $adn="DELETE FROM  LAMCorp_expenses  WHERE exp_id = ?";
-         $stmt= $mysqli->prepare($adn);
-         $stmt->bind_param('i',$id);
-         $stmt->execute();
-         $stmt->close();	 
-   
-            if($stmt)
-            {
-                $success = "Deleted" && header("refresh:1; url=manage_expenses.php");
-            }
-            else
-            {
-                $err = "Try Again Later";
-            }
-     }
+    //Delete Reset
+    if(isset($_GET['delete']))
+    {
+        $id=intval($_GET['delete']);
+        $adn="DELETE FROM  LAMCorp_passwordresets  WHERE reset_id = ?";
+        $stmt= $mysqli->prepare($adn);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $stmt->close();	 
+        if($stmt)
+        {
+            $success = "Deleted" && header("refresh:1; url=reset.php");
+        }
+        else
+        {
+            $err = "Try Again Later";
+        }
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +47,8 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Expenses</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Manage Expenses</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Password Resets</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Accounts </span></li>
                             </ol>
                         </nav>
 
@@ -81,17 +81,15 @@
                                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Code</th>
-                                            <th>Type</th>
-                                            <th>Amount</th>
-                                            <th>Belongs To</th>
-                                            <th>Date</th>
+                                            <th>Account Email</th>
+                                            <th>Reset Code</th>
+                                            <th>Reset Token</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $ret="SELECT * FROM  LAMCorp_expenses WHERE exp_type !='' "; 
+                                            $ret="SELECT * FROM  LAMCorp_passwordresets "; 
                                             $stmt= $mysqli->prepare($ret) ;
                                             $stmt->execute() ;//ok
                                             $res=$stmt->get_result();
@@ -100,21 +98,28 @@
                                             {
                                         ?>
                                             <tr>
-                                                <td><a href="update_expense.php?exp_id=<?php echo $row->exp_id;?>" clas="text-primary"><?php echo $row->exp_code;?></a></td>
-                                                <td><?php echo $row->exp_type;?></td>
-                                                <td>Ksh <?php echo $row->exp_amt;?></td>
-                                                <td><?php echo $row->kiosk_number;?></td>
-                                                <td><?php echo date("d-M-Y", strtotime($row->created_at));?></td>
+                                                <td><?php echo $row->email;?></td>
+                                                <td><?php echo $row->reset_code;?></td>
+                                                <td><?php echo $row->token;?></td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-dark btn-sm">Manage Expense</button>
+                                                        <button type="button" class="btn btn-dark btn-sm">Manage Password Reset</button>
                                                         <button type="button" class="btn btn-dark btn-sm dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                        <a class="dropdown-item text-primary" href="update_expense.php?exp_id=<?php echo $row->exp_id;?>">Update</a>
+                                                        <?php
+                                                            if($row->status == '0')
+                                                            {
+                                                                echo "<a class='dropdown-item text-primary' href='resetConf.php?email=$row->email&reset_code=$row->reset_code&reset_id=$row->reset_id&status=1'>Change Password</a>";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "<a class='dropdown-item text-success' href='mailto:$row->email?subject=Password Reset Request&body=Token:$row->token,New Password=$row->reset_code'>Send Email</a>";
+                                                            }
+                                                        ?>
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item text-danger" href="manage_expenses.php?delete_expense=<?php echo $row->exp_id;?>">Delete</a>
+                                                        <a class="dropdown-item text-danger" href="reset.php?delete=<?php echo $row->reset_id;?>">Delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
