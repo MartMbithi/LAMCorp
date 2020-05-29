@@ -8,6 +8,7 @@ The LAMCorp Suite provides the professional tools for monitoring transparency an
 ## Glance Of LAMCorp Suite 😉😉😉
 
 <p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/1.png"></p>
+<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/4.png"></p>
 <p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/2.png"></p>
 <p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/3.png"></p>
 
