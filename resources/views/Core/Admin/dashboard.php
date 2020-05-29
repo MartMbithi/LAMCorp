@@ -249,7 +249,7 @@
                         <div class="widget widget-chart-three">
                             <div class="widget-heading">
                                 <div class="">
-                                    <h6 class="">Cash Flow Per Water Kiosk(ATM or Water point)</h6>
+                                    <h6 class="">Cash Flow Per Till Numbers</h6>
                                 </div>
                                 <!--
                                 <div class="dropdown  custom-dropdown">
@@ -272,6 +272,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-activity-three">
@@ -317,14 +318,26 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div id="chartDonut" class="col-xl-12 layout-spacing">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">                                
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Incomes And Expenditures</h4> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div id="s-line-area" class=""></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
             <?php include("partials/footer.php");?>
         </div>
         <!--  END CONTENT PART  -->
-
     </div>
     <!-- END MAIN CONTAINER -->
 
@@ -345,6 +358,8 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="plugins/apex/apexcharts.min.js"></script>
     <script src="assets/js/dashboard/dash_2.js"></script>
+    <script src="assets/js/scrollspyNav.js"></script>
+    <!--<script src="plugins/apex/custom-apexcharts.js"></script>-->
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <!--Cash flow chart per kiosk js-->
     <script>
@@ -395,14 +410,11 @@
             colors: ['transparent']
         },
         series: [{
-            name: 'Till Numbers',
-            data: [58, 44, 55, 57, 56, 61, 58, 63, 60, 66, 56, 63]
-        }, {
-            name: 'Cash',
-            data: [91, 76, 85, 101, 98, 87, 105, 91, 114, 94, 66, 70]
+            name: 'Amount Paid Ksh',
+            data: [<?php echo $SafPayments;?>,<?php echo $AirtelPayments;?>,<?php echo $TelkomPayments;?> ]
         }],
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            categories: ['MPESA TillNumber <?php echo $Safaricom;?>', 'AirtelMoney TillNumber <?php echo $Airtel;?>', 'TKash TillNumber <?php echo $Telkom;?>'],
         },
         fill: {
           type: 'gradient',
@@ -428,7 +440,41 @@
         document.querySelector("#cashFlow"),
         d_1options1
     );
+
     d_1C_3.render();
+
+    //INCOMES AGANIST EXPENSES
+    var sLineArea = {
+        chart: {
+            height: 350,
+            type: 'area',
+            toolbar: {
+            show: false,
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        series: [{
+            name: 'Incomes In Ksh',
+            data: [0,<?php echo $incomes;?>]
+        }, {
+            name: 'Expenses In Ksh',
+            data: [0, <?php echo $total_expenses;?>]
+        }],
+
+        xaxis: {
+            categories: ["transactions","transactions"],                
+        },
+    }
+    var chart = new ApexCharts(
+    document.querySelector("#s-line-area"),
+    sLineArea
+    );
+    chart.render();
 </script>
 
 </body>
