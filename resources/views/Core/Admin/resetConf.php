@@ -8,17 +8,17 @@
     if(isset($_POST['changePassword']))
     {
            
-        $email = $_GET['email'];
+        $wp_number = $_GET['wp_number'];
         $reset_code = sha1(md5($_GET['reset_code']));
         $status = $_GET['status'];
         $reset_id =$_GET['reset_id'];
         //Insert Captured information to a database table
-        $query="UPDATE LAMCorp_staffs  SET staff_pwd=? WHERE staff_email=?";
+        $query="UPDATE LAMCorp_waterPoints  SET wp_pass=? WHERE wp_number=?";
         $stats = "UPDATE LAMCorp_passwordresets SET status=? WHERE reset_id=?";
         $stmt = $mysqli->prepare($query);
         $stmt1= $mysqli->prepare($stats);
         //bind paramaters
-        $rc=$stmt->bind_param('ss', $reset_code, $email);
+        $rc=$stmt->bind_param('ss', $reset_code, $wp_number);
         $rc=$stmt1->bind_param('si', $status, $reset_id);
         $stmt->execute();
         $stmt1->execute();
@@ -46,10 +46,10 @@
     </div>
     <!--  END NAVBAR  -->
     <?php
-        $email = $_GET['email'];
-        $ret="SELECT * FROM  LAMCorp_staffs WHERE staff_email = ?"; 
+        $wp_number = $_GET['wp_number'];
+        $ret="SELECT * FROM  LAMCorp_waterPoints WHERE wp_number = ?"; 
         $stmt= $mysqli->prepare($ret) ;
-        $stmt->bind_param('s', $email);
+        $stmt->bind_param('s', $wp_number);
         $stmt->execute() ;//ok
         $res=$stmt->get_result();
         $cnt=1;
@@ -69,7 +69,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">Password Resets</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><span>Update <?php echo $row->staff_name;?> Password</span></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><span>Update <?php echo $row->wp_number;?> Password</span></li>
                                 </ol>
                             </nav>
 
@@ -109,29 +109,16 @@
                                         <form method="post" enctype="multipart/form-data" >
                                             <div class="form-row mb-4">
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputEmail4">Full Names</label>
-                                                    <input required readonly type="text" value="<?php echo $row->staff_name;?>" name="staff_name" class="form-control" id="inputEmail4" placeholder="John Doe">
+                                                    <label for="inputEmail4">Water Point Number</label>
+                                                    <input required readonly type="text" value="<?php echo $row->wp_number;?>" name="" class="form-control" id="inputEmail4" placeholder="John Doe">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">National ID Number</label>
-                                                    <input required  readonly type="text" value="<?php echo $row->staff_idno;?>" name="staff_idno" class="form-control" id="inputPassword4" placeholder="123456789">
+                                                    <label for="inputPassword4">Staff On Duty</label>
+                                                    <input required  readonly type="text" value="<?php echo $row->wp_staff_on_duty;?>" name="" class="form-control" id="inputPassword4" placeholder="123456789">
                                                 </div>
                                             </div>
-                                            <div class="form-row mb-4">
-                                                <div class="form-group col-md-4">
-                                                    <label for="inputEmail4">Email</label>
-                                                    <input required readonly  value="<?php echo $row->staff_email;?>" type="email" name="staff_email" class="form-control" id="inputEmail4" placeholder="martdevelopers254@gmail.com">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="inputPassword4">Phone Number</label>
-                                                    <input  required type="text" readonly value="<?php echo $row->staff_phoneno;?>" name="staff_phoneno" class="form-control" id="inputPassword4" placeholder="+254737229776">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="inputAddress">Staff Number</label>
-                                                    <input type="text" required readonly name="staff_num" value="<?php echo $row->staff_num;?>" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                                </div>
-                                            </div>                                            
-                                        <button type="submit" name="changePassword" class="btn btn-outline-success mt-3">Update <?php echo $row->staff_name;?> Password</button>
+                                                                                        
+                                        <button type="submit" name="changePassword" class="btn btn-outline-success mt-3">Update <?php echo $row->wp_number;?> Password</button>
                                         </form>
                                     </div>
                                 </div>
