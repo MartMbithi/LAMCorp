@@ -5,10 +5,7 @@
     //include('partials/analytics.php');
     check_login();
     //Generate Staff Password And Staff Number
-    
-    $ln = 6;
-    $pass = substr(str_shuffle('0123456789QWERTYUIOPLKJHGFDSAZXCVBNM'),1,$ln);
-
+  
     if(isset($_POST['updateStaff']))
     {
            
@@ -18,9 +15,9 @@
         $staff_phoneno = $_POST['staff_phoneno'];
         $staff_adr  = $_POST['staff_adr'];
         $staff_dob =$_POST['staff_dob'];
-        $staff_pwd= sha1(md5($_POST['staff_pwd']));
+       // $staff_pwd= sha1(md5($_POST['staff_pwd']));
         //$staff_icon
-        $allow_login = $_POST['allow_login'];
+        //$allow_login = $_POST['allow_login'];
         $staff_number  = $_GET['staff_number'];
         $staff_icon = $_FILES["staff_icon"]["name"];
         move_uploaded_file($_FILES["staff_icon"]["tmp_name"],"assets/img/staff/".$_FILES["staff_icon"]["name"]);
@@ -28,10 +25,10 @@
 
 
         //Insert Captured information to a database table
-        $query="UPDATE LAMCorp_staffs  SET staff_name=?, staff_bio=?, staff_idno=?, staff_email=?, staff_phoneno=?, staff_adr=?, staff_dob=?, staff_pwd=?, allow_login=?, staff_icon=? WHERE staff_num=?";
+        $query="UPDATE LAMCorp_staffs  SET staff_name=?, staff_bio=?, staff_idno=?, staff_email=?, staff_phoneno=?, staff_adr=?, staff_dob=?, staff_icon=? WHERE staff_num=?";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
-        $rc=$stmt->bind_param('sssssssssss',$staff_name, $staff_bio, $staff_idno, $staff_email, $staff_phoneno, $staff_adr, $staff_dob, $staff_pwd, $allow_login, $staff_icon, $staff_number);
+        $rc=$stmt->bind_param('sssssssss',$staff_name, $staff_bio, $staff_idno, $staff_email, $staff_phoneno, $staff_adr, $staff_dob, $staff_icon, $staff_number);
         $stmt->execute();
 
         //declare a varible which will be passed to alert function
@@ -143,19 +140,7 @@
                                                 <label for="inputAddress">Address</label>
                                                 <input type="text" value="<?php echo $row->staff_adr;?>" required name="staff_adr" class="form-control" id="inputAddress" placeholder="1234 Main St">
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputAddress">Staff Number</label>
-                                                    <input type="text" required readonly name="staff_num" value="<?php echo $row->staff_num;?>" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputAddress">Allow Login?</label>
-                                                    <select name="allow_login" class="form-control  basic">
-                                                    <option value="0" selected="selected">Yes</option>
-                                                        <option value="1">No</option>
-                                                    </select> 
-                                                </div> 
-                                            </div>                                   
+                                                                               
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label for="inputAddress2">D.O.B</label>
@@ -166,8 +151,8 @@
                                                     <input type="file" class="form-control" value="<?php echo $row->staff_icon;?>" name="staff_icon" id="inputZip">
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="inputState">Password</label>
-                                                    <input type="text" required readonly value="<?php echo $pass;?>" name="staff_pwd" class="form-control" id="inputZip">
+                                                    <label for="inputAddress">Staff Number</label>
+                                                    <input type="text" required readonly name="staff_num" value="<?php echo $row->staff_num;?>" class="form-control" id="inputAddress" placeholder="1234 Main St">
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4">

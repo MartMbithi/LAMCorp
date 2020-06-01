@@ -81,7 +81,7 @@
                                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Account Email</th>
+                                            <th>Water Point Number</th>
                                             <th>Reset Code</th>
                                             <th>Reset Token</th>
                                             <th>Action</th>
@@ -89,7 +89,7 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $ret="SELECT * FROM  LAMCorp_passwordresets "; 
+                                            $ret="SELECT * FROM  LAMCorp_passwordresets WHERE status ='0' "; 
                                             $stmt= $mysqli->prepare($ret) ;
                                             $stmt->execute() ;//ok
                                             $res=$stmt->get_result();
@@ -98,7 +98,7 @@
                                             {
                                         ?>
                                             <tr>
-                                                <td><?php echo $row->email;?></td>
+                                                <td><?php echo $row->wp_number;?></td>
                                                 <td><?php echo $row->reset_code;?></td>
                                                 <td><?php echo $row->token;?></td>
                                                 <td>
@@ -108,16 +108,7 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                        <?php
-                                                            if($row->status == '0')
-                                                            {
-                                                                echo "<a class='dropdown-item text-primary' href='resetConf.php?email=$row->email&reset_code=$row->reset_code&reset_id=$row->reset_id&status=1'>Change Password</a>";
-                                                            }
-                                                            else
-                                                            {
-                                                                echo "<a class='dropdown-item text-success' href='mailto:$row->email?subject=Password Reset Request&body=Token:$row->token,New Password=$row->reset_code'>Send Email</a>";
-                                                            }
-                                                        ?>
+                                                        <a class='dropdown-item text-primary' href='resetConf.php?wp_number=<?php echo $row->wp_number;?>&reset_code=<?php echo $row->reset_code;?>&reset_id=<?php echo $row->reset_id;?>&status=1'>Change Password</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item text-danger" href="reset.php?delete=<?php echo $row->reset_id;?>">Delete</a>
                                                         </div>

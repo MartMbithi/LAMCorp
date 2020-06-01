@@ -6,9 +6,12 @@
     check_login();
     //Generate Staff Password And Staff Number
     $length1 = 3;
-    $length2=3;    
+    $length2=3; 
+    $length3=5;   
     $numericalwaterpointNo =  substr(str_shuffle('0123456789'),1,$length1);
     $alphbaeticalwaterpointNo = substr(str_shuffle('QWERTYUIOOPLKJHGFDSAZXCVBNM'),1,$length2);
+    $pas=substr(str_shuffle('QWERTYUIOOPLKJHGFDSAZXCVBNM'),1,$length3);
+
     
     if(isset($_POST['addWaterKiosk']))
     {
@@ -52,11 +55,12 @@
                 $wp_staff_on_duty  = $_POST['wp_staff_on_duty'];
                 $wp_status = $_POST['wp_status'];
                 $wp_phone = $_POST['wp_phone'];
+                $wp_pass = sha1(md5($_POST['wp_pass']));
                 //Insert Captured information to a database table
-                $query="INSERT INTO LAMCorp_waterPoints (wp_phone, wp_location, wp_opening_hrs, wp_closing_hrs, wp_staff_on_duty, wp_status, wp_number) VALUES (?,?,?,?,?,?,?)";
+                $query="INSERT INTO LAMCorp_waterPoints (wp_phone, wp_location, wp_opening_hrs, wp_closing_hrs, wp_staff_on_duty, wp_status, wp_number, wp_pass) VALUES (?,?,?,?,?,?,?,?)";
                 $stmt = $mysqli->prepare($query);
                 //bind paramaters
-                $rc=$stmt->bind_param('sssssss', $wp_phone, $wp_location, $wp_opening_hrs, $wp_closing_hrs, $wp_staff_on_duty, $wp_status, $wp_number);
+                $rc=$stmt->bind_param('ssssssss', $wp_phone, $wp_location, $wp_opening_hrs, $wp_closing_hrs, $wp_staff_on_duty, $wp_status, $wp_number, $wp_pass);
                 $stmt->execute();
 
                 //declare a varible which will be passed to alert function
@@ -136,11 +140,15 @@
                                     <div class="widget-content widget-content-area">
                                         <form method="post" enctype="multipart/form-data" >
                                             <div class="form-row mb-4">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                     <label for="inputPassword4">Water Point | Kiosk Number</label>
                                                     <input required type="text" readonly name="wp_number" value="LAMCorp-<?php echo $alphbaeticalwaterpointNo;?>-<?php echo $numericalwaterpointNo;?>" class="form-control">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4">Water Point | Kiosk Account Password</label>
+                                                    <input required type="text" readonly name="wp_pass" value="<?php echo $pas;?>" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-4">
                                                     <label for="inputPassword4">Water Point | Kiosk Phone Number</label>
                                                     <input required type="text"   name="wp_phone"  class="form-control">
                                                 </div>
