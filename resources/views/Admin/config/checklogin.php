@@ -11,8 +11,4 @@ function check_login()
 			
 		}
 }
-
-
-
-
 ?>
