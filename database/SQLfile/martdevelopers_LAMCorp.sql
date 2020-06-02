@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2020 at 02:11 PM
+-- Generation Time: Jun 02, 2020 at 03:57 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.26
 
@@ -111,7 +111,11 @@ CREATE TABLE `LAMCorp_passwordresets` (
 
 INSERT INTO `LAMCorp_passwordresets` (`reset_id`, `wp_number`, `token`, `reset_code`, `status`, `created_at`) VALUES
 (17, 'LAMCorp-ZMP-160', 'd0a12811475d6d79ee40c3d050f6c66452507166', 'VY34N2FE', '1', '2020-06-01 08:05:59.602187'),
-(18, 'LAMCorp-PHO-821', '893191694a47cf6618cb66396bf072a7e8ba9536', 'CSLH7V60', '1', '2020-06-01 08:24:34.750492');
+(18, 'LAMCorp-PHO-821', '893191694a47cf6618cb66396bf072a7e8ba9536', 'CSLH7V60', '1', '2020-06-01 08:24:34.750492'),
+(19, 'LAMCorp-PHO-821', '0e7b74b477cc5866442139aa8954f5332680d8cd', '5NAFQJYE', '1', '2020-06-02 13:55:43.707594'),
+(20, 'LAMCorp-ZMP-160', 'fc0b3a6f7811364bc0d182eec032dd5fb41f3030', '1', '0', '2020-06-02 13:53:16.546150'),
+(21, 'LAMCorp-ZMP-160', '284e1d2bc58735c570c6769e2a02882b0f0b658f', '2GWLENM6', '1', '2020-06-02 13:55:50.605676'),
+(22, 'LAMCorp-LVT-236', '4a7711c784645f6da9adf7979308e70e527bb1e1', 'XB8DCV7P', '1', '2020-06-02 13:55:35.402577');
 
 -- --------------------------------------------------------
 
@@ -333,9 +337,9 @@ CREATE TABLE `LAMCorp_waterPoints` (
 --
 
 INSERT INTO `LAMCorp_waterPoints` (`wp_id`, `wp_number`, `wp_pass`, `wp_phone`, `wp_location`, `wp_opening_hrs`, `wp_closing_hrs`, `wp_staff_on_duty`, `wp_status`, `created_at`) VALUES
-(1, 'LAMCorp-PHO-821', '2f5f248660952819667353932bb359b7b8ebae73', '+254 737229776', 'Industrial Area, Dundori Road Nairobi - Kenya', '08:00', '21:00', 'Jane Doe LAMCorp-ZPW-350', 'Operational', '2020-06-01 09:00:19.432402'),
-(3, 'LAMCorp-ZMP-160', '27e8207e2215a72b86b1c1c8925533ecdf775338', '+254 737229776', ' Nadume Close off Lunga Lunga Road, Industrial Area, Nairobi, Kenya', '08:00', '21:00', 'Mart Developers LAMCorp-XKG-617', 'Operational', '2020-06-01 08:05:59.317311'),
-(4, 'LAMCorp-LVT-236', '02461dee1972be58396f0e8773f5fae1bee02de3', '+254 737229776', 'Off Mombasa Road, Behind London Distillers (K) Ltd, Past Great Wall Gardens on Shangai Road , Athi River - Nairobi - Kenya', '09:00', '21:00', 'Mart Developers LAMCorp-XKG-617', 'Operational', '2020-06-01 07:41:43.602277');
+(1, 'LAMCorp-PHO-821', 'cdfb11d89d7f15d5d140ee7ba04b0024f760d525', '+254 737229776', 'Industrial Area, Dundori Road Nairobi - Kenya', '08:00', '21:00', 'Jane Doe LAMCorp-ZPW-350', 'Operational', '2020-06-02 13:55:43.422237'),
+(3, 'LAMCorp-ZMP-160', '272c7fd4d3ba9d911df6d3ab9be82f9e0418bb69', '+254 737229776', ' Nadume Close off Lunga Lunga Road, Industrial Area, Nairobi, Kenya', '08:00', '21:00', 'Mart Developers LAMCorp-XKG-617', 'Operational', '2020-06-02 13:55:50.348934'),
+(4, 'LAMCorp-LVT-236', '0bab60ebc4c1812a90655248b775f5ac9c61689d', '+254 737229776', 'Off Mombasa Road, Behind London Distillers (K) Ltd, Past Great Wall Gardens on Shangai Road , Athi River - Nairobi - Kenya', '09:00', '21:00', 'Mart Developers LAMCorp-XKG-617', 'Operational', '2020-06-02 13:55:34.978482');
 
 -- --------------------------------------------------------
 
@@ -460,7 +464,7 @@ ALTER TABLE `LAMCorp_notifications`
 -- AUTO_INCREMENT for table `LAMCorp_passwordresets`
 --
 ALTER TABLE `LAMCorp_passwordresets`
-  MODIFY `reset_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `reset_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `LAMCorp_payments`
