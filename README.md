@@ -52,10 +52,27 @@ The LAMCorp Suite provides the professional tools for monitoring transparency an
   <img src="https://contributors-img.web.app/image?repo=MartMbithi/LAMCorp" />
 </a>
 
-
  ## Bug List 🕷️🕷️
+
  * The following are the known bugs so far 
     * Printing from LAMCorp Suite Bug `Prints Blank Page`
+
+
+ ## Login Credentials
+ * Admin:
+    * Email: `admin@lamcorp.org`
+    * Password: `demo`
+    
+ * Water Points / Water Kiosks :
+    * Number: `LAMCorp-PHO-821`
+    * Password: `5NAFQJYE`
+    
+    * Number: `LAMCorp-ZMP-160`
+    * Password: `2GWLENM6`
+    
+    * Number: `LAMCorp-LVT-236`
+    * Password: `XB8DCV7P`
+   
     
  ## License
 
