@@ -1,5 +1,8 @@
 
-<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/LAMCorp.png" width="400"></p> 
+<p align="center"><img src="https://github.com/MartMbithi/LAMCorp/blob/master/LAMCorp.png" width="400"></p>
+<p align="center"><img src="https://travis-ci.org/MartMbithi/LAMCorp.svg?branch=master 
+"></p>
+
 
 ## About LAMCorp
 
