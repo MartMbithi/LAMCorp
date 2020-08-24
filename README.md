@@ -60,7 +60,7 @@ The LAMCorp Suite provides the professional tools for monitoring transparency an
  ## Bug List 🕷️🕷️
 
  * The following are the known bugs so far 
-    * Printing from LAMCorp Suite Bug `Prints Blank Page`
+    * <strike> Printing from LAMCorp Suite Bug `Prints Blank Page` </strike> Squashed
 
 
  ## Login Credentials
