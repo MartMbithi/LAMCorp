@@ -3,41 +3,29 @@ session_start();
 include('config/config.php');
 require_once('config/code-generator.php');
 
-if(isset($_POST['reset_pwd']))
-{
-    if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-    {
-        $err = 'Invalid Email';
+if (isset($_POST['reset_pwd'])) {
+
+    //exit('This email is already being used');
+    //Reset Password
+    $reset_code = $_POST['reset_code'];
+    $reset_token = sha1(md5($_POST['reset_token']));
+    $email = $_POST['email'];
+    $reset_id = $_POST['reset_id'];
+    $query = "INSERT INTO cfms_password_resets (reset_id, reset_email, reset_code, reset_token) VALUES (?,?,?,?)";
+    $reset = $mysqli->prepare($query);
+    $rc = $reset->bind_param('ssss', $reset_id, $email, $reset_code, $reset_token);
+    $reset->execute();
+    if ($reset) {
+        $success = "Password Reset Instructions Sent To Your Email";
+        // && header("refresh:1; url=index.php");
+    } else {
+        $err = "Please Try Again Or Try Later";
     }
-    $checkEmail = mysqli_query($mysqli, "SELECT `user_email` FROM `cfms_users` WHERE `user_email` = '".$_POST['email']."'") or exit(mysqli_error($mysqli));
-    if( mysqli_num_rows($checkEmail) > 0 )  {
-        //exit('This email is already being used');
-        //Reset Password
-        $reset_code = $_POST['reset_code'];
-        $reset_token = sha1(md5($_POST['reset_token']));
-        $email = $_POST['email'];
-        $reset_id = $_POST['reset_id'];
-        $query="INSERT INTO cfms_password_resets (reset_id, reset_email, reset_code, reset_token) VALUES (?,?,?,?)";
-        $reset = $mysqli->prepare($query);
-        $rc=$reset->bind_param('ssss', $reset_id, $email, $reset_code, $reset_token);
-        $reset->execute();
-        if($reset)
-        {
-            $success = "Password Reset Instructions Sent To Your Email";
-            // && header("refresh:1; url=index.php");
-        }
-        else
-        {
-            $err = "Please Try Again Or Try Later";
-        }
-         
-    }
-    else 
-    {
-        $err = "No account with that email";
-    }
-        
+} else {
+    $err = "No account with that email";
 }
+
+
 require_once('partials/_head.php');
 ?>
 
@@ -54,9 +42,9 @@ require_once('partials/_head.php');
                 <form method="post">
                     <div class="form-group">
                         <div class="form-label-group">
-                            <input type="hidden" id="inputEmail" name="reset_code" value="<?php echo $rc;?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
-                            <input type="hidden" id="inputEmail" name="reset_token" value="<?php echo $tk;?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
-                            <input type="hidden" id="inputEmail" name="reset_id" value="<?php echo $rid;?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
+                            <input type="hidden" id="inputEmail" name="reset_code" value="<?php echo $rc; ?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
+                            <input type="hidden" id="inputEmail" name="reset_token" value="<?php echo $tk; ?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
+                            <input type="hidden" id="inputEmail" name="reset_id" value="<?php echo $rid; ?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
                             <label for="inputEmail">Select Kiosk Number To Reset Password</label>
                         </div>
                     </div>
