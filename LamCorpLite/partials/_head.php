@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Chicken Farm MIS - Instilling Inovation In Poultry Farming</title>
+    <title>Water Management System - Instilling Inovation In Water Sales</title>
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 

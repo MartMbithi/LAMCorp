@@ -3,6 +3,6 @@
     $dbuser="root";
     $dbpass="";
     $host="localhost";
-    $db="chicken_farm_management_system";
+    $db="Water_Management_System";
     $mysqli=new mysqli($host,$dbuser, $dbpass, $db);
 ?>

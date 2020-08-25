@@ -13,22 +13,27 @@
     <li class="nav-item active">
         <a class="nav-link" href="poultry_farms.php">
             <i class="fas fa-fw fa-tractor"></i>
-            <span>Poultry Farms</span></a>
+            <span>Water Kiosks</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="poultry_farms.php">
+            <i class="fas fa-fw fa-tractor"></i>
+            <span>Staff Duties</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="chicken_breeds.php">
             <i class="fas fa-fw fa-kiwi-bird"></i>
-            <span>Chicken Breeds</span></a>
+            <span>Payments</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="products.php">
             <i class="fas fa-fw fa-egg"></i>
-            <span>Products</span></a>
+            <span>Expenses</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="sales.php">
             <i class="fas fa-fw fa-handshake"></i>
-            <span>Sales</span></a>
+            <span>Password Resets</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="logout.php">
