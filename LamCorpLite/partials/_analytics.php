@@ -1,6 +1,6 @@
 <?php
 //1. Staffs / Employees
-$query = "SELECT COUNT(*) FROM ` Staff ` ";
+$query = "SELECT COUNT(*) FROM `Staff` ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($staff);
@@ -8,7 +8,7 @@ $stmt->fetch();
 $stmt->close();
 
 //2. Water Kiosks
-$query = "SELECT COUNT(*) FROM `Water_Kiosk ` ";
+$query = "SELECT COUNT(*) FROM `Water_Kiosk` ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($waterKiosks);

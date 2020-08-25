@@ -57,7 +57,7 @@ require_once('partials/_head.php');
                                 </div>
                                 <div class="mr-5"><?php echo $waterKiosks; ?> Water Kiosks</div>
                             </div>
-                            <a class="card-footer text-white clearfix small z-1" href="chicken_breeds.php">
+                            <a class="card-footer text-white clearfix small z-1" href="water_kiosks.php">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                     <i class="fas fa-angle-right"></i>
@@ -73,7 +73,7 @@ require_once('partials/_head.php');
                                 </div>
                                 <div class="mr-5"><?php echo $sales; ?> Total Water Sales</div>
                             </div>
-                            <a class="card-footer text-white clearfix small z-1" href="poultry_farms.php">
+                            <a class="card-footer text-white clearfix small z-1" href="sales.php">
                                 <span class="float-left"> View Details</span>
                                 <span class="float-right">
                                     <i class="fas fa-angle-right"></i>
@@ -89,7 +89,7 @@ require_once('partials/_head.php');
                                 </div>
                                 <div class="mr-5">Ksh <?php echo $expenses; ?> Total Expenses</div>
                             </div>
-                            <a class="card-footer text-white clearfix small z-1" href="sales.php">
+                            <a class="card-footer text-white clearfix small z-1" href="expenses.php">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                     <i class="fas fa-angle-right"></i>
