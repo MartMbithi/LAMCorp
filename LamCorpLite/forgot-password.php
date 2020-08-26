@@ -21,10 +21,7 @@ if (isset($_POST['reset_pwd'])) {
     } else {
         $err = "Please Try Again Or Try Later";
     }
-} else {
-    $err = "No Kiosk With That Number";
 }
-
 
 require_once('partials/_head.php');
 ?>
@@ -45,8 +42,8 @@ require_once('partials/_head.php');
                             <label for="inputEmail">Select Kiosk Number To Reset Password</label>
                             <input type="hidden" name="Reset_Wrongpassword_number" value="<?php echo $beta;?>">
                             <input type="hidden" name="Reset_code" value="<?php echo $rc;?>">
-                            <input type="hiddden" name="Reset_status" value="Pending">
-                            <select name="" class="form-control" name="Reset_Kiosk_id" id="kioskNumber">
+                            <input type="hidden" name="Reset_status" value="Pending">
+                            <select  class="form-control" required name="Reset_Kiosk_id" id="kioskNumber">
                                 <?php
                                 //Fetch all available kiosk numbers
                                 $ret = "SELECT * FROM  Water_Kiosk  ";
@@ -56,6 +53,7 @@ require_once('partials/_head.php');
                                 while ($kiosk = $res->fetch_object()) {
                                 ?>
                                     <option><?php echo $kiosk->kiosk_no;?></option>
+
                                 <?php } ?>
                             </select>
                         </div>
