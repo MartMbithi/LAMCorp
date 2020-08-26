@@ -83,9 +83,9 @@ require_once('partials/_head.php');
                             </div>
                             <br>
                             <div class="form-row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <label>Staff Bio | Desc | About</label>
-                                    <textarea type="text" required name="Staff_desc" class="form-control"></textarea>
+                                    <textarea type="text" rows="5"  name="Staff_desc" class="form-control"></textarea>
                                 </div>
                             </div>
                             <br>
