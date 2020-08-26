@@ -53,7 +53,7 @@ require_once('partials/_head.php');
                         <div class="card text-white bg-success o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-kiwi-bird"></i>
+                                    <i class="fas fa-fw fa-tint"></i>
                                 </div>
                                 <div class="mr-5"><?php echo $waterKiosks; ?> Water Kiosks</div>
                             </div>
@@ -69,7 +69,7 @@ require_once('partials/_head.php');
                         <div class="card text-white bg-success o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-tractor"></i>
+                                    <i class="fas fa-fw fa-shopping-cart"></i>
                                 </div>
                                 <div class="mr-5">Ksh <?php echo $sales; ?> Total Water Sales</div>
                             </div>
@@ -103,7 +103,7 @@ require_once('partials/_head.php');
                 <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-handshake"></i>
+                        <i class="fas fa-shopping-cart"></i>
                         Sales Records</div>
                     <div class="card-body">
                         <div class="table-responsive">
