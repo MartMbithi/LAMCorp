@@ -3,16 +3,15 @@ session_start();
 include('config/config.php');
 include('config/checklogin.php');
 check_login();
-//Delete Staff
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $adn = "DELETE FROM  Staff  WHERE  Staff_id = ?";
+    $adn = "DELETE FROM  Water_Kiosk  WHERE  kiosk_id = ?";
     $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('s', $id);
+    $stmt->bind_param('i', $id);
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=staffs.php");
+        $success = "Deleted" && header("refresh:1; url=kiosks.php");
     } else {
         $err = "Try Again Later";
     }
@@ -40,7 +39,7 @@ require_once('partials/_head.php');
                     <li class="breadcrumb-item">
                         <a href="dashboard.php">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Staff Records</li>
+                    <li class="breadcrumb-item active">Kiosks Records</li>
                 </ol>
 
                 <!-- DataTables Example -->
