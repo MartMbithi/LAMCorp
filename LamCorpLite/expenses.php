@@ -75,8 +75,8 @@ require_once('partials/_head.php');
                                             <td><?php echo $k->Expense_code; ?></td>
                                             <td><?php echo $k->Expense_date; ?></td>
                                             <td><?php echo $k->Expense_type; ?></td>
-                                            <td><?php echo $k->Expense_amount;?></td>
-                                            <td>Ksh <?php echo $k->Expense_kiosk_id;?></td>
+                                            <td>Ksh <?php echo $k->Expense_amount;?></td>
+                                            <td><?php echo $k->Expense_kiosk_id;?></td>
                                             <td>
                                                 <a href="update_expense.php?update=<?php echo $k->Expense_id; ?>">
                                                     <span class="badge badge-success"><i class="fas fa-edit"></i> Update </span>
