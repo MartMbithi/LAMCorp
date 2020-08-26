@@ -7,13 +7,13 @@ if (isset($_POST['reset_pwd'])) {
 
     //exit('This email is already being used');
     //Reset Password
-    $reset_code = $_POST['reset_code'];
-    $reset_token = sha1(md5($_POST['reset_token']));
-    $email = $_POST['email'];
-    $reset_id = $_POST['reset_id'];
-    $query = "INSERT INTO cfms_password_resets (reset_id, reset_email, reset_code, reset_token) VALUES (?,?,?,?)";
+    $Reset_Wrongpassword_number = $_POST['Reset_Wrongpassword_number'];
+    $Reset_Kiosk_id = $_POST['Reset_Kiosk_id'];
+    $Reset_code  = $_POST['Reset_code'];
+    $Reset_status = $_POST['Reset_status'];
+    $query = "INSERT INTO Passwordresets (Reset_Wrongpassword_number, Reset_Kiosk_id, Reset_code, Reset_status) VALUES (?,?,?,?)";
     $reset = $mysqli->prepare($query);
-    $rc = $reset->bind_param('ssss', $reset_id, $email, $reset_code, $reset_token);
+    $rc = $reset->bind_param('ssss', $Reset_Wrongpassword_number, $Reset_Kiosk_id, $reseReset_code, $Reset_status);
     $reset->execute();
     if ($reset) {
         $success = "Password Reset Instructions Sent To Your Email";
@@ -22,7 +22,7 @@ if (isset($_POST['reset_pwd'])) {
         $err = "Please Try Again Or Try Later";
     }
 } else {
-    $err = "No account with that email";
+    $err = "No Kiosk With That Number";
 }
 
 
@@ -37,15 +37,27 @@ require_once('partials/_head.php');
             <div class="card-body">
                 <div class="text-center mb-4">
                     <h4>Forgot your password?</h4>
-                    <p>Enter your email address and we will send you instructions on how to reset your password.</p>
+                    <p>Enter your Kiosk NUmber and the password will be reset</p>
                 </div>
                 <form method="post">
                     <div class="form-group">
                         <div class="form-label-group">
-                            <input type="hidden" id="inputEmail" name="reset_code" value="<?php echo $rc; ?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
-                            <input type="hidden" id="inputEmail" name="reset_token" value="<?php echo $tk; ?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
-                            <input type="hidden" id="inputEmail" name="reset_id" value="<?php echo $rid; ?>" class="form-control" placeholder="Enter email address" required="required" autofocus="autofocus">
                             <label for="inputEmail">Select Kiosk Number To Reset Password</label>
+                            <input type="hidden" name="Reset_Wrongpassword_number" value="<?php echo $beta;?>">
+                            <input type="hidden" name="Reset_code" value="<?php echo $rc;?>">
+                            <input type="hiddden" name="Reset_status" value="Pending">
+                            <select name="" class="form-control" name="Reset_Kiosk_id" id="kioskNumber">
+                                <?php
+                                //Fetch all available kiosk numbers
+                                $ret = "SELECT * FROM  Water_Kiosk  ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute();
+                                $res = $stmt->get_result();
+                                while ($kiosk = $res->fetch_object()) {
+                                ?>
+                                    <option><?php echo $kiosk->kiosk_no;?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                     <input type="submit" name="reset_pwd" class="btn btn-primary btn-block" value="Reset Password">
