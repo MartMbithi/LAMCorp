@@ -78,9 +78,6 @@ require_once('partials/_head.php');
                                                 <a href="update_staff.php?update=<?php echo $staff->Staff_id; ?>">
                                                     <span class="badge badge-success"><i class="fas fa-user-edit"></i> Update Staff</span>
                                                 </a>
-                                                <a href="allow_login.php?login_id=<?php echo $staff->Staff_id; ?>">
-                                                    <span class="badge badge-primary"><i class="fas fa-sign-in"></i> Login Permissions</span>
-                                                </a>
                                                 <a href="staffs.php?delete=<?php echo $staff->Staff_id; ?>">
                                                     <span class="badge badge-danger"><i class="fas fa-user-times"></i> Delete Staff</span>
                                                 </a>
