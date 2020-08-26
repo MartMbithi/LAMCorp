@@ -34,14 +34,13 @@ require_once('partials/_head.php');
             <div class="card-body">
                 <div class="text-center mb-4">
                     <h4>Forgot your password?</h4>
-                    <p>Enter your Kiosk NUmber and the password will be reset</p>
+                    <p>Select Kiosk Number and the password will be reset</p>
                 </div>
                 <form method="post">
                     <div class="form-group">
                         <div class="form-label-group">
-                            <label for="inputEmail">Select Kiosk Number To Reset Password</label>
                             <input type="hidden" name="Reset_Wrongpassword_number" value="<?php echo $beta;?>">
-                            <input type="hidden" name="Reset_code" value="<?php echo $rc;?>">
+                            <input type="hidden" name="Reset_code" value="<?php echo $resetcode;?>">
                             <input type="hidden" name="Reset_status" value="Pending">
                             <select  class="form-control" required name="Reset_Kiosk_id" id="kioskNumber">
                                 <?php

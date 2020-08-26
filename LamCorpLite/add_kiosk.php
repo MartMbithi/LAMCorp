@@ -68,7 +68,7 @@ require_once('partials/_head.php');
                         <form method="POST">
                             <div class="form-row">
                                 <div class="col-md-4">
-                                    <label>Kisok Number</label>
+                                    <label>Kiosk Number</label>
                                     <input type="text " required name="kiosk_no" value="<?php echo $beta;?>" class="form-control">
                                 </div>
                                 <div class="col-md-4">
@@ -83,7 +83,7 @@ require_once('partials/_head.php');
                             <br>
                             <div class="form-row">
                                 <div class="col-md-4">
-                                    <label>Kisok Opening Hours</label>
+                                    <label>Kiosk Opening Hours</label>
                                     <input type="time" required name="kiosk_opening_hours"  class="form-control">
                                 </div>
                                 <div class="col-md-4">

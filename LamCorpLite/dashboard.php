@@ -71,9 +71,9 @@ require_once('partials/_head.php');
                                 <div class="card-body-icon">
                                     <i class="fas fa-fw fa-tractor"></i>
                                 </div>
-                                <div class="mr-5"><?php echo $sales; ?> Total Water Sales</div>
+                                <div class="mr-5">Ksh <?php echo $sales; ?> Total Water Sales</div>
                             </div>
-                            <a class="card-footer text-white clearfix small z-1" href="sales.php">
+                            <a class="card-footer text-white clearfix small z-1" href="payments.php">
                                 <span class="float-left"> View Details</span>
                                 <span class="float-right">
                                     <i class="fas fa-angle-right"></i>
@@ -129,7 +129,7 @@ require_once('partials/_head.php');
                                             <td><?php echo $sales->Payment_till_number; ?></td>
                                             <td><?php echo $sales->Payment_number; ?></td>
                                             <td>Ksh <?php echo $sales->Payment_amount; ?></td>
-                                            <td><?php echo $Payment_date; ?></td>
+                                            <td><?php echo $sales->Payment_date; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

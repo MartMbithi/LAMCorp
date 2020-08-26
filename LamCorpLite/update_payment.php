@@ -7,23 +7,25 @@ require_once('config/code-generator.php');
 check_login();
 if (isset($_POST['update'])) {
 
-    $kiosk_name = $_POST['kiosk_name'];
-    $kiosk_no = $_POST['kiosk_no'];
-    $kiosk_location = $_POST['kiosk_location'];
-    $kiosk_opening_hours = $_POST['kiosk_opening_hours'];
-    $kiosk_closing_hours = $_POST['kiosk_closing_hours'];
-    $kiosk_status = $_POST['kiosk_status'];
+    $Payment_number  = $_POST['Payment_number'];
+    $Payment_kiosk_id = $_POST['Payment_kiosk_id'];
+    $Payment_till_number = $_POST['Payment_till_number'];
+    $Payment_transaction_code = $_POST['Payment_transaction_code'];
+    $Payment_amount  = $_POST['Payment_amount'];
+    $Payment_date  = $_POST['Payment_date'];
+    $Payment_reference_no = $_POST['Payment_reference_no'];
+    $Payment_desc = $_POST['Payment_desc'];
     $update = $_GET['update'];
 
     //Insert Captured information to a database table
-    $postQuery = "UPDATE Water_Kiosk SET  kiosk_name =?, kiosk_no =?, kiosk_location =?, kiosk_opening_hours =?, kiosk_closing_hours =?, kiosk_status =? WHERE kiosk_id =?";
+    $postQuery = "UPDATE Payments SET Payment_number =?, Payment_kiosk_id =?, Payment_till_number =?, Payment_transaction_code =?, Payment_amount =?, Payment_date =?, Payment_reference_no =?, Payment_desc =? WHERE Payment_id =?";
     $postStmt = $mysqli->prepare($postQuery);
     //bind paramaters
-    $rc = $postStmt->bind_param('ssssssi', $kiosk_name, $kiosk_no, $kiosk_location, $kiosk_opening_hours, $kiosk_closing_hours, $kiosk_status, $update);
+    $rc = $postStmt->bind_param('ssssssssi', $Payment_number, $Payment_kiosk_id, $Payment_till_number, $Payment_transaction_code, $Payment_amount, $Payment_date, $Payment_reference_no, $Payment_desc, $update);
     $postStmt->execute();
     //declare a varible which will be passed to alert function
     if ($postStmt) {
-        $success = "Updated" && header("refresh:1; url=kiosks.php");
+        $success = "Updated" && header("refresh:1; url=payments.php");
     } else {
         $err = "Please Try Again Or Try Later";
     }
@@ -43,7 +45,7 @@ require_once('partials/_head.php');
         <?php
         require_once('partials/_sidebar.php');
         $update = $_GET['update'];
-        $ret = "SELECT * FROM  Water_Kiosk  ";
+        $ret = "SELECT * FROM  Payments  ";
         $stmt = $mysqli->prepare($ret);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -60,10 +62,10 @@ require_once('partials/_head.php');
                             <a href="dashboard.php">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="kiosks.php">Water Kiosks</a>
+                            <a href="payments.php">Payments</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Update
+                            Update Payment
                         </li>
                     </ol>
 
@@ -74,35 +76,43 @@ require_once('partials/_head.php');
                         <div class="card-body">
                             <form method="POST">
                                 <div class="form-row">
-                                    <div class="col-md-4">
-                                        <label>Kiosk Number</label>
-                                        <input type="text " required value="<?php echo $k->kiosk_no; ?>" name="kiosk_no" value="<?php echo $beta; ?>" class="form-control">
+                                    <div class="col-md-3">
+                                        <label>Payment Number</label>
+                                        <input type="text " value="<?php echo $k->Payment_number; ?>" required name="Payment_number" value="<?php echo $beta; ?>" class="form-control">
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Kiosk Name</label>
-                                        <input type="text" value="<?php echo $k->kiosk_name; ?>" required name="kiosk_name" class="form-control">
+                                    <div class="col-md-3">
+                                        <label>Kiosk ID</label>
+                                        <input type="text" required name="Payment_kiosk_id" value="<?php echo $k->Payment_kiosk_id; ?>" class="form-control">
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Kiosk Location</label>
-                                        <input type="text " value="<?php echo $k->kiosk_location; ?>" required name="kiosk_location" class="form-control">
+                                    <div class="col-md-3">
+                                        <label>Till Number</label>
+                                        <input type="text" required name="Payment_till_number" value="<?php echo $k->Payment_till_number; ?>" class="form-control">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Date Paid</label>
+                                        <input type="date" required name="Payment_date" value="<?php echo $k->Payment_date; ?>" class="form-control">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="form-row">
                                     <div class="col-md-4">
-                                        <label>Kiosk Opening Hours</label>
-                                        <input type="time" required name="kiosk_opening_hours" value="<?php echo $k->kiosk_opening_hours; ?>" class="form-control">
+                                        <label>Transaction Code</label>
+                                        <input type="text" required value="<?php echo $k->Payment_transaction_code; ?>" name="Payment_transaction_code" value="<?php echo $mpesaCode; ?>" class="form-control">
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Kiosk Closing Hours</label>
-                                        <input type="time" required name="kiosk_closing_hours" value="<?php echo $k->kiosk_closing_hours; ?>" class="form-control">
+                                        <label>Refrence Number</label>
+                                        <input type="text" value="<?php echo $k->Payment_reference_no; ?>" required name="Payment_reference_no" class="form-control">
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Kiosk Status</label>
-                                        <select class="form-control" name="kiosk_status">
-                                            <option>Operational</option>
-                                            <option>Faulty</option>
-                                        </select>
+                                        <label>Amount Paid</label>
+                                        <input type="text" required name="Payment_amount" value="<?php echo $k->Payment_amount; ?>" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <label>Payment Description</label>
+                                        <textarea type="text" rows="5" name="Payment_desc" class="form-control"><?php echo $k->Payment_desc; ?></textarea>
                                     </div>
                                 </div>
                                 <br>
