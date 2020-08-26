@@ -74,10 +74,11 @@ require_once('partials/_head.php');
                                     ?>
                                         <tr>
                                             <td><?php echo $k->kiosk_name; ?></td>
-                                            <td><?php echo $k->kiosk_number; ?></td>
+                                            <td><?php echo $k->kiosk_no; ?></td>
                                             <td><?php echo $k->kiosk_location; ?></td>
                                             <td><?php echo $k->kiosk_opening_hours;?></td>
                                             <td><?php echo $k->kiosk_closing_hours;?></td>
+                                            <td><?php echo $k->kiosk_status;?></td>
                                             <td>
                                                 <a href="update_kiosk.php?update=<?php echo $k->kiosk_id; ?>">
                                                     <span class="badge badge-success"><i class="fas fa-user-edit"></i> Update </span>

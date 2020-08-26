@@ -69,7 +69,7 @@ require_once('partials/_head.php');
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <label>Kisok Number</label>
-                                    <input type="text " required name="kiosk_number" value="<?php echo $beta;?>" class="form-control">
+                                    <input type="text " required name="kiosk_no" value="<?php echo $beta;?>" class="form-control">
                                 </div>
                                 <div class="col-md-4">
                                     <label>Kiosk Name</label>
@@ -92,7 +92,7 @@ require_once('partials/_head.php');
                                 </div>
                                 <div class="col-md-4">
                                     <label>Kiosk Status</label>
-                                    <select name="kiosk_status">
+                                    <select class="form-control" name="kiosk_status">
                                         <option>Operational</option>
                                         <option>Faulty</option>
                                     </select>
