@@ -13,7 +13,7 @@ if (isset($_POST['reset_pwd'])) {
     $Reset_status = $_POST['Reset_status'];
     $query = "INSERT INTO Passwordresets (Reset_Wrongpassword_number, Reset_Kiosk_id, Reset_code, Reset_status) VALUES (?,?,?,?)";
     $reset = $mysqli->prepare($query);
-    $rc = $reset->bind_param('ssss', $Reset_Wrongpassword_number, $Reset_Kiosk_id, $reseReset_code, $Reset_status);
+    $rc = $reset->bind_param('ssss', $Reset_Wrongpassword_number, $Reset_Kiosk_id, $Reset_code, $Reset_status);
     $reset->execute();
     if ($reset) {
         $success = "Password Reset Instructions Sent To Your Email";
@@ -51,7 +51,7 @@ require_once('partials/_head.php');
                                 $res = $stmt->get_result();
                                 while ($kiosk = $res->fetch_object()) {
                                 ?>
-                                    <option><?php echo $kiosk->kiosk_no;?></option>
+                                    <option><?php echo $kiosk->kiosk_id;?></option>
 
                                 <?php } ?>
                             </select>
