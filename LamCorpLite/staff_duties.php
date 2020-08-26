@@ -40,7 +40,7 @@ require_once('partials/_head.php');
                     <li class="breadcrumb-item">
                         <a href="dashboard.php">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Staff Records</li>
+                    <li class="breadcrumb-item active">Staff Duties</li>
                 </ol>
 
                 <!-- DataTables Example -->
