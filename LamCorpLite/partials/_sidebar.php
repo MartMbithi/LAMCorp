@@ -31,12 +31,12 @@
             <span>Expenses</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="resets.php">
+        <a class="nav-link" href="auth_permissions.php">
             <i class="fas fa-fw fa-user-cog"></i>
             <span>Auth Permissions</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="logout.php">
+        <a href="#" data-toggle="modal" data-target="#logoutModal" class="nav-link" >
             <i class="fas fa-fw fa-power-off"></i>
             <span>End Session</span></a>
     </li>
