@@ -11,27 +11,27 @@
             <span>Staffs</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="poultry_farms.php">
+        <a class="nav-link" href="kiosks.php">
             <i class="fas fa-fw fa-tractor"></i>
             <span>Water Kiosks</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="poultry_farms.php">
+        <a class="nav-link" href="staff_duties.php">
             <i class="fas fa-fw fa-tractor"></i>
             <span>Staff Duties</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="chicken_breeds.php">
+        <a class="nav-link" href="payments.php">
             <i class="fas fa-fw fa-kiwi-bird"></i>
             <span>Payments</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="products.php">
+        <a class="nav-link" href="expenses.php">
             <i class="fas fa-fw fa-egg"></i>
             <span>Expenses</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="sales.php">
+        <a class="nav-link" href="resets.php">
             <i class="fas fa-fw fa-handshake"></i>
             <span>Password Resets</span></a>
     </li>
