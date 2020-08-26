@@ -45,7 +45,7 @@ require_once('partials/_head.php');
                 <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <a class="btn btn-outline-success" href="add_staff.php">
+                        <a class="btn btn-outline-success" href="add_kiosk.php">
                             <i class="fas fa-plus"></i>
                             Add New Kiosk Record
                         </a>
