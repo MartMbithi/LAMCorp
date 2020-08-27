@@ -20,12 +20,10 @@ check_login();
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="vendor/DataTables/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/buttons.css" />
-    <link rel="stylesheet" type="text/css" href="css/reports.css" />
-
-
-
+    <link rel="stylesheet" type="text/css" href="vendor/DT/datatables.css">
+    <link rel="stylesheet" type="text/css" href="vendor/DT/custom_dt_html5.css">
+    <link rel="stylesheet" type="text/css" href="vendor/DT/dt-global_style.css">
+ 
 </head>
 
 <body id="page-top">
@@ -63,7 +61,7 @@ check_login();
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="example" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="html5-extension" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>National ID Number</th>
@@ -123,21 +121,36 @@ check_login();
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <script type="text/javascript" src="vendor/DataTables/datatables.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+    <script src="vendor/DT/jquery.dataTables.js"></script>
+    <script src="vendor/DT/dataTables.bootstrap4.js"></script>
+    <script src="vendor/DT/datatables.js"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="vendor/DT/button-ext/dataTables.buttons.min.js"></script>
+    <script src="vendor/DT/button-ext/jszip.min.js"></script>    
+    <script src="vendor/DT/button-ext/buttons.html5.min.js"></script>
+    <script src="vendor/DT/button-ext/buttons.print.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'colvis']
-            });
-
-            table.buttons().container()
-                .appendTo('#example_wrapper .col-sm-6:eq(0)');
-        });
+        $('#html5-extension').DataTable( {
+            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+            buttons: {
+                buttons: [
+                    { extend: 'copy', className: 'btn' },
+                    { extend: 'csv', className: 'btn' },
+                    { extend: 'excel', className: 'btn' },
+                    { extend: 'print', className: 'btn' }
+                ]
+            },
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+               "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7 
+        } );
     </script>
 </body>
 
