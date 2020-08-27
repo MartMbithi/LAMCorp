@@ -15,7 +15,7 @@ check_login();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Water Management System  -  Staff Reports</title>
+    <title>Water Management System - Water Kiosks Reports</title>
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -47,7 +47,7 @@ check_login();
                         <a href="dashboard.php">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">Reports</li>
-                    <li class="breadcrumb-item Active">Staff Reports</li>
+                    <li class="breadcrumb-item Active">Water Points</li>
 
                 </ol>
 
@@ -61,23 +61,30 @@ check_login();
                             <table class="table table-bordered" id="html5-extension" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>National ID Number</th>
                                         <th>Name</th>
-                                        <th>Phone Number</th>
+                                        <th>Number</th>
+                                        <th>Location</th>
+                                        <th>Opening Hrs</th>
+                                        <th>Closing Hrs</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM  Staff  ";
+                                    $ret = "SELECT * FROM  Water_Kiosk  ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute();
                                     $res = $stmt->get_result();
-                                    while ($staff = $res->fetch_object()) {
+                                    while ($k = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $staff->Staff_id_no; ?></td>
-                                            <td><?php echo $staff->Staff_name; ?></td>
-                                            <td><?php echo $staff->Staff_phone_no; ?></td>
+                                            <td><?php echo $k->kiosk_name; ?></td>
+                                            <td><?php echo $k->kiosk_no; ?></td>
+                                            <td><?php echo $k->kiosk_location; ?></td>
+                                            <td><?php echo $k->kiosk_opening_hours; ?></td>
+                                            <td><?php echo $k->kiosk_closing_hours; ?></td>
+                                            <td><?php echo $k->kiosk_status; ?></td>
+
                                         </tr>
                                     <?php } ?>
                                 </tbody>
