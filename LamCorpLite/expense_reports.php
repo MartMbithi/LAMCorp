@@ -15,7 +15,7 @@ check_login();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Water Management System - Payment Reports</title>
+    <title>Water Management System - Expenses Reports</title>
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -47,7 +47,7 @@ check_login();
                         <a href="dashboard.php">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">Reports</li>
-                    <li class="breadcrumb-item Active">Payments</li>
+                    <li class="breadcrumb-item Active">Expenses</li>
 
                 </ol>
 
@@ -61,30 +61,27 @@ check_login();
                             <table class="table table-bordered" id="html5-extension" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Number</th>
-                                        <th>Till Number</th>
-                                        <th>Trn Code</th>
-                                        <th>Ref No</th>
+                                        <th>Code</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
                                         <th>Amount</th>
-                                        <th>Date Paid</th>
+                                        <th>Kiosk Id</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM  Payments  ";
+                                    $ret = "SELECT * FROM  Expenses  ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute();
                                     $res = $stmt->get_result();
                                     while ($k = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $k->Payment_number; ?></td>
-                                            <td><?php echo $k->Payment_till_number; ?></td>
-                                            <td><?php echo $k->Payment_transaction_code; ?></td>
-                                            <td><?php echo $k->Payment_reference_no; ?></td>
-                                            <td>Ksh <?php echo $k->Payment_amount; ?></td>
-                                            <td><?php echo $k->Payment_date; ?></td>
-
+                                            <td><?php echo $k->Expense_code; ?></td>
+                                            <td><?php echo $k->Expense_date; ?></td>
+                                            <td><?php echo $k->Expense_type; ?></td>
+                                            <td>Ksh <?php echo $k->Expense_amount; ?></td>
+                                            <td><?php echo $k->Expense_kiosk_id; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
