@@ -20,8 +20,11 @@ check_login();
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="vendor/DataTables/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="css/reports.css" />
+
+
 
 </head>
 
@@ -60,7 +63,7 @@ check_login();
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="example" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>National ID Number</th>
@@ -122,14 +125,20 @@ check_login();
     <!-- Page level plugin JavaScript-->
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
+    <script type="text/javascript" src="vendor/DataTables/datatables.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'colvis']
+            });
 
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
-    <script type="text/javascript" src="vendor/DataTables/datatables.min.js"></script>
-
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-sm-6:eq(0)');
+        });
+    </script>
 </body>
 
 </html>
