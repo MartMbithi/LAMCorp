@@ -35,8 +35,20 @@
             <i class="fas fa-fw fa-user-cog"></i>
             <span>Auth Permissions</span></a>
     </li>
+    <li class="active nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Reports</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="staff_reports.php">Staff Records</a>
+            <a class="dropdown-item" href="water_kiosks_reports.php">Water Kiosks</a>
+            <a class="dropdown-item" href="payment_reports.php">Payments</a>
+            <a class="dropdown-item" href="expense_reports.php">Expenses</a>
+        </div>
+    </li>
     <li class="nav-item active">
-        <a href="#" data-toggle="modal" data-target="#logoutModal" class="nav-link" >
+        <a href="#" data-toggle="modal" data-target="#logoutModal" class="nav-link">
             <i class="fas fa-fw fa-power-off"></i>
             <span>End Session</span></a>
     </li>
