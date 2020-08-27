@@ -64,7 +64,7 @@ require_once('partials/_head.php');
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM  Staff WHERE Staff_login_id ='0' ";
+                                    $ret = "SELECT * FROM  Staff WHERE Staff_login_id ='' ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute();
                                     $res = $stmt->get_result();

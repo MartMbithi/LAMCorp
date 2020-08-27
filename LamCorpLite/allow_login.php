@@ -47,7 +47,7 @@ require_once('partials/_head.php');
         <?php
         require_once('partials/_sidebar.php');
         $Staff_id = $_GET['Staff_id'];
-        $ret = "SELECT * FROM  Staff WHERE Staff_login_id ='0' ";
+        $ret = "SELECT * FROM  Staff WHERE Staff_id ='$Staff_id' ";
         $stmt = $mysqli->prepare($ret);
         $stmt->execute();
         $res = $stmt->get_result();
