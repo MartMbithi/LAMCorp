@@ -54,7 +54,7 @@ check_login();
                 <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h5>Staff Records</h5>
+                        <h5>Water Kiosks</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
